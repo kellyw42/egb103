@@ -2,6 +2,7 @@
 
 import inspect
 import ast
+import math
 import sys
 import builtins
 
@@ -166,11 +167,14 @@ def maintainability(function) :
     else :
         return False
     
-functions = []    
+def clear() :
+    global functions
+    functions = []
     
 def register(input) :
     global functions
-    functions.append(input)
+    if not input in functions :
+        functions.append(input)
         
 def appropriate_loops() :  
     correct = 0
@@ -282,3 +286,21 @@ def test_complexity() :
             print(good / 4, 'out of 2 marks', file=sys.stderr)
     except NameError :
         print('Need to install radon module in order to assess code complexity and maintainability', file=sys.stderr)
+        
+epsilon = 1e-10
+
+def assert_equal(x, y, error = epsilon) :
+    if isinstance(x, float) :
+        if math.isnan(x) :
+            return math.isnan(y)
+        else :
+            assert(abs(x-y) <= error)
+    elif isinstance(x, list) or isinstance(x, tuple) :
+        assert(len(x) == len(y))
+        for i in range(len(x)) :
+            assert_equal(x[i], y[i])
+    else :
+        if x != y :
+            print(type(x), type(y))
+            print(x, y)
+        assert(x == y)
