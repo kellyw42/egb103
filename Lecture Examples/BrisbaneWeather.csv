@@ -1,0 +1,14 @@
+Month,MinTemp,MaxTemp,Rainfall
+,Celcius,Celcius,Millimetres
+January,20.7,29.4,159.6
+February,20.6,29,158.3
+March,19.4,28,140.7
+April,16.6,26.1,92.5
+May,13.3,23.2,73.7
+June,10.9,20.9,67.8
+July,9.5,20.4,56.5
+August,10.3,21.8,45.9
+September,12.9,24,45.7
+October,15.8,26.1,75.4
+November,18.1,27.8,97
+December,19.8,29.1,133.3
