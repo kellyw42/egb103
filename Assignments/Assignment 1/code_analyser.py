@@ -290,7 +290,7 @@ def nested_range_loops(defn):
 def complex(AST, expected_complexity) :                
     for defn in radon.complexity.cc_visit(AST):
         if defn.complexity > expected_complexity :
-            Fail(f'Function {function.name} could be made less complex ({defn.complexity})')
+            Fail(f'Function {defn.name} could be made less complex ({defn.complexity})')
             return True
     return False
 
