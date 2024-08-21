@@ -290,7 +290,7 @@ def nested_range_loops(defn):
 def complex(AST, expected_complexity) :                
     for defn in radon.complexity.cc_visit(AST):
         if defn.complexity > expected_complexity :
-            Fail(f'Function {function.name} could be made less complex ({defn.complexity})')
+            Fail(f'Function {defn.name} could be made less complex ({defn.complexity})')
             return True
     return False
 
@@ -454,7 +454,7 @@ def test_non_functional_requirements_create_hexagonal_layout():
 def test_non_functional_requirements_rotate_single_location():
     code = code_cells()
     src, defn = find_only_one(code, 'rotate_single_location')
-    if all([defn and no_loops(defn), maintainable(src, defn.name), not complex(defn, 1), names_follow_guidelines(defn), implemented(defn)]) :
+    if all([defn, no_loops(defn), maintainable(src, defn.name), not complex(defn, 1), names_follow_guidelines(defn), implemented(defn)]) :
         Pass('Pass')
     
 def test_non_functional_requirements_rotate_layout():
