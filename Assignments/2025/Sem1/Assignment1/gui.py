@@ -167,7 +167,7 @@ class GUIFlightSimulator() :
             instrument.layout.width = '300px'
         
         self.grid = widgets.HBox([
-            widgets.VBox([self.initiate_button, self.play_button, self.pause_button, self.step_button, self.restart_button, self.test_button]), 
+            widgets.VBox([self.initiate_button, self.play_button, self.pause_button, self.step_button, self.restart_button]), 
             self.throttle_slider,
             self.elevator_slider,
             widgets.VBox(instruments),
