@@ -37,16 +37,6 @@ def rotate_points(points, centre, angle_radians) :
         rotated_points.append(rotate_point(point, centre, angle_radians))
     return rotated_points
 
-def zip(list_of_points) : # Fixme: use this!!!
-    x_coordinates = []
-    y_coordinates = []
-    for (x, y) in points :
-        x_coordinates.append(x)
-        y_coordinates.append(y)
-    return x_coordinates, y_coordinates
-
- 
-
 class AircraftIllustration :
     
     fuselage_vertices = [(-180,60), (-160,60), (-125,10), (-70,10), (-45,25), (0,35), (10,25), (30,15), (70,10), (80,0), (82,35), (82,-35), (80,0), (70,-10), (60,-18), (-35,-25), (-175,-5), (-180,60)]    
@@ -73,6 +63,9 @@ class AircraftIllustration :
         self.support2, = ax.plot([], [], color = 'black', zorder=0)  
         self.elevator, = ax.plot([], [], color = 'red', linewidth = 2)
         self.air_direction, = ax.plot([], [], color='green', linewidth=2)
+        self.arrow1, = ax.plot([], [], color='green', linewidth=2)
+        self.arrow2, = ax.plot([], [], color='green', linewidth=2)
+        
         self.ground, = ax.plot([], [], color = 'black', linewidth = 5)  
         
         self.update(0, 0, 0, (0, 0))
@@ -81,14 +74,26 @@ class AircraftIllustration :
         self.fig.canvas.footer_visible = False
     
     def update(self, pitch_angle_radians, altitude_metres, elevator_angle_radians, velocity):        
-        rotated_vertices = [rotate_point(vertex, (0, 0), pitch_angle_radians) for vertex in self.fuselage_vertices] 
-        self.fuselage.set_path(Path(rotated_vertices))    
-    
-        rotated_vertices = [rotate_point(vertex, (0, 0), pitch_angle_radians) for vertex in self.wing_vertices]
-        self.wing.set_path(Path(rotated_vertices))   
-        
-        (dx,dy) = rotate_point((vector_magnitude(velocity)*4 ,0), (0, 0), vector_angle_radians(velocity))
+        self.fuselage.set_path(Path(rotate_points(self.fuselage_vertices, (0, 0), pitch_angle_radians)))    
+        self.wing.set_path(Path(rotate_points(self.wing_vertices, (0, 0), pitch_angle_radians)))   
+
+        length = vector_magnitude(velocity)*4
+        (dx,dy) = rotate_point((length ,0), (0, 0), vector_angle_radians(velocity))            
         self.air_direction.set_data([0, dx], [0, dy])  
+
+        # adjust length of arrow head
+        lx = 9
+        ly = 5
+        if length < 20:
+            lx *= (length/20)
+            ly *= (length/20)
+            
+        arrow1 = (dx - lx, dy - ly)
+        arrow2 = (dx - lx, dy + ly)   
+        (dx1, dy1) = rotate_point(arrow1, (dx, dy), vector_angle_radians(velocity))
+        (dx2, dy2) = rotate_point(arrow2, (dx, dy), vector_angle_radians(velocity))
+        self.arrow1.set_data([dx, dx1], [dy, dy1])
+        self.arrow2.set_data([dx, dx2], [dy, dy2])
         
         (x_pivot, y_pivot) = rotate_point((-170, 0), (0, 0), pitch_angle_radians)
         (x_rear, y_rear)   = rotate_point((x_pivot-30, y_pivot), (x_pivot, y_pivot), pitch_angle_radians + elevator_angle_radians*3)
@@ -109,9 +114,6 @@ class AircraftIllustration :
             
         altitude = altitude_metres * 50
         self.ground.set_data([-200, 200], [-50 - altitude, -50 - altitude])    
-
-
-
 
 class GUIFlightSimulator() :
 
@@ -179,7 +181,7 @@ class GUIFlightSimulator() :
         self.update_instruments()
     
     def step_simulation(self, frame):
-        self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)   # Fixme: parameterize these constants
+        self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)
         self.update_display()
     
     def initiate_simulation(self, input):  
