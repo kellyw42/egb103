@@ -43,8 +43,7 @@ class AircraftIllustration :
     wing_vertices = [(-55,26), (7,28), (10,27), (11,28), (11,30), (8,32), (1,36), (-11,35), (-18,35), (-55,26)]        
     
     def __init__(self) : 
-        #plt.ion()
-        plt.ioff()
+        plt.ion()
         self.fig, ax = plt.subplots()
         ax.set_xlim(-200, 200)
         ax.set_ylim(-200, 200)
