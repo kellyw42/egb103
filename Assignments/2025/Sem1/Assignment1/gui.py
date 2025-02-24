@@ -43,7 +43,7 @@ class AircraftIllustration :
     wing_vertices = [(-55,26), (7,28), (10,27), (11,28), (11,30), (8,32), (1,36), (-11,35), (-18,35), (-55,26)]        
     
     def __init__(self) : 
-        plt.ion()
+        plt.ioff()
         self.fig, ax = plt.subplots()
         ax.set_xlim(-200, 200)
         ax.set_ylim(-200, 200)
@@ -124,16 +124,16 @@ class GUIFlightSimulator() :
         self.delta_time = delta_time
         self.illustration = AircraftIllustration()
         self.create_cockpit()    
-        self.restart_simulation(None) # create the plane
+        self.restart_simulation() # create the plane
+        self.paused = True
+        self.ani = animation.FuncAnimation(self.illustration.fig, self.animation_step, frames=range(100), blit=False, interval=200, cache_frame_data=False, repeat=True)  
+        
 
     def create_cockpit(self) :
-        self.initiate_button = widgets.Button(description="Enable Play", disabled=False)
-        self.play_button = widgets.Button(description="Play", disabled=True)
+        self.play_button = widgets.Button(description="Play", disabled=False)
         self.pause_button = widgets.Button(description="Pause", disabled=True)
         self.step_button = widgets.Button(description="Single Step", disabled=False)
         self.restart_button = widgets.Button(description="Restart", disabled=False)
-
-        self.test_button = widgets.Button(description="Log Text", disabled=False)
         
         self.timestep_widget = widgets.Text(description="Time Elapsed:", disabled=True)
         self.altitude_widget = widgets.Text(description="Altimeter:", disabled=True)
@@ -145,20 +145,16 @@ class GUIFlightSimulator() :
         
         self.throttle_slider = widgets.FloatSlider(value=0, min=0, max=1, step=0.001, description='Throttle:', continuous_update=True, readout_format='.1%', 
                                                    orientation='vertical', layout=widgets.Layout(height='400px'))
-        self.elevator_slider = widgets.FloatSlider(value=0, min=-16, max=16, step=0.1, description='Elevators:', continuous_update=True, readout_format='.1', 
+        self.elevator_slider = widgets.FloatSlider(value=0, min=-16, max=16, step=0.1, description='Elevators:', continuous_update=True, readout_format='+.2f', 
                                                    orientation='vertical', layout=widgets.Layout(height='400px'))
     
         self.throttle_slider.observe(self.on_throttle_change, names='value')
         self.elevator_slider.observe(self.on_elevator_change, names='value')
         
-        self.initiate_button.on_click(self.initiate_simulation)
         self.play_button.on_click(self.play_simulation)
         self.pause_button.on_click(self.pause_simulation)
-        self.step_button.on_click(self.step_simulation)
-        self.restart_button.on_click(self.restart_simulation)
-
-
-        self.test_button.on_click(self.log_test)
+        self.step_button.on_click(self.single_step)
+        self.restart_button.on_click(self.restart_button_handler)
 
         instruments = [self.timestep_widget, self.altitude_widget, self.distance_widget, self.airspeed_widget, self.vertical_speed_widget, self.pitch_angle_widget, self.engine_rpm_widget]
 
@@ -167,66 +163,54 @@ class GUIFlightSimulator() :
             instrument.layout.width = '300px'
         
         self.grid = widgets.HBox([
-            widgets.VBox([self.initiate_button, self.play_button, self.pause_button, self.step_button, self.restart_button]), 
+            widgets.VBox([self.play_button, self.pause_button, self.step_button, self.restart_button]), 
             self.throttle_slider,
             self.elevator_slider,
             widgets.VBox(instruments),
             self.illustration.fig.canvas
         ])
 
-        display(self.grid)        
+        display(self.grid)   
+        
     
     def update_display(self) :
         self.illustration.update(self.aircraft.pitch_angle_radians, self.aircraft.position[1], self.aircraft.stabilizer_angle_radians, self.aircraft.linear_velocity)        
         self.update_instruments()
     
-    def step_simulation(self, frame):
-        self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)
-        self.update_display()
-    
-    def initiate_simulation(self, input):  
-        self.ani = animation.FuncAnimation(self.illustration.fig, self.step_simulation, frames=range(100), blit=False, interval=200, cache_frame_data=False, repeat=True)     
-        self.pause_simulation(None)
+    def animation_step(self, frame):
         
-        self.initiate_button.disabled = True
-        self.play_button.disabled = False
-        self.step_button.disabled = False
-        self.restart_button.disabled = False     
+        self.play_button.disabled = not self.paused
+        self.pause_button.disabled = self.paused
+        self.step_button.disabled = not self.paused
+        
+        if (self.paused):
+            self.ani.event_source.stop() 
+        else:
+            self.single_step(None)
+
+    def single_step(self, input):
+        self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)
+        self.update_display()    
+        self.illustration.fig.canvas.draw()
     
     def play_simulation(self, input):
-        self.update_display()
+        self.paused = False
         self.ani.event_source.start()     
-
-        self.play_button.disabled = False
-        self.pause_button.disabled = False
-        self.step_button.disabled = True
-        self.restart_button.disabled = True
-        
+     
     def pause_simulation(self, input):
-        self.ani.event_source.stop()  
-
-        self.play_button.disabled = False
-        self.pause_button.disabled = False
-        self.step_button.disabled = False
-        self.restart_button.disabled = False      
-        
-    def restart_simulation(self, input):
+        self.paused = True 
+    
+    def restart_simulation(self):
         self.aircraft = self.aircraft_model() # create a new plane of this model
         self.aircraft.time_elapsed = 0
-        self.throttle_slider.value = self.aircraft.throttle
-        self.elevator_slider.value = math.degrees(self.aircraft.stabilizer_angle_radians)
+        self.aircraft.throttle = self.throttle_slider.value
+        self.aircraft.stabilizer_angle_radians = math.radians(self.elevator_slider.value)
+
+    def restart_button_handler(self, input):
+        self.restart_simulation()
         self.update_display()  
-
-    def log_test(self, input):
-        default = self.aircraft_model() 
-        attributes = []
-        self.aircraft.time_elapsed = int(self.aircraft.time_elapsed * 1000) / 1000.0
-        for attr in dir(self.aircraft) :
-            if not attr.startswith('__') and getattr(self.aircraft, attr) != getattr(default, attr) :
-                attributes.append(f'{attr}={getattr(self.aircraft, attr)}')
-        with open('tests.txt', 'a') as file :
-            print(f'{self.aircraft.__class__.__name__}({",".join(attributes)})', file=file)
-
+        self.illustration.fig.canvas.draw()
+    
     def on_throttle_change(self, change):
         self.aircraft.throttle = change['new']
 
