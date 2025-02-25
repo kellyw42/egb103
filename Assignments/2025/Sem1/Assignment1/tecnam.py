@@ -88,7 +88,7 @@ class TecnamP92:
         Returns:
         float: Propeller torque coefficient.
         """
-        return -1e-4 * advance_rate ** 2 + 0.0005203
+        return (-1e-4 * advance_rate ** 2 + 0.0005203) / 1.74
 
     @staticmethod
     def propeller_thrust_coefficient(advance_rate):
@@ -101,7 +101,7 @@ class TecnamP92:
         Returns:
         float: Propeller thrust coefficient.
         """
-        return -0.0025 * advance_rate ** 2 + 0.0025
+        return (-0.0025 * advance_rate ** 2 + 0.0025) * 1.74
 
     @staticmethod
     def wing_lift_coefficient(angle_of_attack_radians):
