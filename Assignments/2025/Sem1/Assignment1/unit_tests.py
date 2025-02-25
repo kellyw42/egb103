@@ -109,7 +109,7 @@ def compare_aircraft(obj1, obj2):
 
     # Check that the values of each attribute are the same
     for attr in attrs1:
-        if getattr(obj1, attr) != getattr(obj2, attr):
+        if not test_equal(getattr(obj1, attr), getattr(obj2, attr)):
             return False
 
     # If all attributes match, return True
