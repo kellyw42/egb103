@@ -53,6 +53,10 @@ class AircraftIllustration :
         ax.set_ylim(-200, 200)
         ax.set_aspect('equal')
         ax.axis('off')
+
+        sky_path = Path([(-200,-200), (-200, 200), (200, 200), (200, -200), (-200, -200)])
+        self.sky = PathPatch(sky_path, facecolor='skyblue', edgecolor='black', lw=1, zorder=-1)
+        ax.add_patch(self.sky)
      
         fuselage_path = Path(self.fuselage_vertices)
         self.fuselage = PathPatch(fuselage_path, facecolor=self.colour, edgecolor='black', lw=1, antialiased=True)
@@ -119,6 +123,8 @@ class AircraftIllustration :
         altitude = altitude_metres * 50
         self.ground.set_data([-200, 200], [-50 - altitude, -50 - altitude])    
 
+        return [self.sky, self.fuselage, self.wing, self.wheels, self.support1, self.support2, self.elevator, self.air_direction, self.arrow1, self.arrow2, self.ground]
+                
 class GUIFlightSimulator() :
 
     def __init__(self, aircraft_model, simulate_multiple_time_steps, steps_per_iteration, delta_time) :
@@ -130,8 +136,7 @@ class GUIFlightSimulator() :
         self.create_cockpit()    
         self.restart_simulation() # create the plane
         self.paused = True
-        self.ani = animation.FuncAnimation(self.illustration.fig, self.animation_step, frames=range(100), blit=False, interval=200, cache_frame_data=False, repeat=True)  
-        
+        self.ani = animation.FuncAnimation(self.illustration.fig, self.animation_step, frames=range(100), blit=False, interval=200, cache_frame_data=False, repeat=True)       
 
     def create_cockpit(self) :
         self.play_button = widgets.Button(description="Play", disabled=False)
@@ -157,7 +162,7 @@ class GUIFlightSimulator() :
         
         self.play_button.on_click(self.play_simulation)
         self.pause_button.on_click(self.pause_simulation)
-        self.step_button.on_click(self.single_step)
+        self.step_button.on_click(self.step_button_handler)
         self.restart_button.on_click(self.restart_button_handler)
 
         instruments = [self.timestep_widget, self.altitude_widget, self.distance_widget, self.airspeed_widget, self.vertical_speed_widget, self.pitch_angle_widget, self.engine_rpm_widget]
@@ -174,13 +179,12 @@ class GUIFlightSimulator() :
             self.illustration.fig.canvas
         ])
 
-        display(self.grid)   
-        
+        display(self.grid)     
     
     def update_display(self) :
-        self.illustration.update(self.aircraft.pitch_angle_radians, self.aircraft.position[1], self.aircraft.stabilizer_angle_radians, self.aircraft.linear_velocity)        
         self.update_instruments()
-    
+        return self.illustration.update(self.aircraft.pitch_angle_radians, self.aircraft.position[1], self.aircraft.stabilizer_angle_radians, self.aircraft.linear_velocity)
+        
     def animation_step(self, frame):
         
         self.play_button.disabled = not self.paused
@@ -190,12 +194,11 @@ class GUIFlightSimulator() :
         if (self.paused):
             self.ani.event_source.stop() 
         else:
-            self.single_step(None)
+            return self.single_step(None)
 
     def single_step(self, input):
         self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)        
-        self.update_display()    
-        self.illustration.fig.canvas.draw()
+        return self.update_display()    
     
     def play_simulation(self, input):
         self.paused = False
@@ -213,6 +216,10 @@ class GUIFlightSimulator() :
     def restart_button_handler(self, input):
         self.restart_simulation()
         self.update_display()  
+        self.illustration.fig.canvas.draw()
+
+    def step_button_handler(self, input):
+        self.single_step(input)
         self.illustration.fig.canvas.draw()
     
     def on_throttle_change(self, change):
