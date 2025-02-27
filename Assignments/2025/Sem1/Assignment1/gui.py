@@ -42,8 +42,12 @@ class AircraftIllustration :
     fuselage_vertices = [(-180,60), (-160,60), (-125,10), (-70,10), (-45,25), (0,35), (10,25), (30,15), (70,10), (80,0), (82,35), (82,-35), (80,0), (70,-10), (60,-18), (-35,-25), (-175,-5), (-180,60)]    
     wing_vertices = [(-55,26), (7,28), (10,27), (11,28), (11,30), (8,32), (1,36), (-11,35), (-18,35), (-55,26)]        
     
-    def __init__(self) : 
+    def __init__(self, aircraft_name) : 
         plt.ioff()
+        if aircraft_name.startswith('Tecnam'): 
+            self.colour = 'blue'
+        else:
+            self.colour = 'purple'
         self.fig, ax = plt.subplots()
         ax.set_xlim(-200, 200)
         ax.set_ylim(-200, 200)
@@ -51,7 +55,7 @@ class AircraftIllustration :
         ax.axis('off')
      
         fuselage_path = Path(self.fuselage_vertices)
-        self.fuselage = PathPatch(fuselage_path, facecolor='blue', edgecolor='black', lw=1, antialiased=True)
+        self.fuselage = PathPatch(fuselage_path, facecolor=self.colour, edgecolor='black', lw=1, antialiased=True)
         ax.add_patch(self.fuselage)   
         
         wing_path = Path(self.wing_vertices)
@@ -122,7 +126,7 @@ class GUIFlightSimulator() :
         self.simulate_multiple_time_steps = simulate_multiple_time_steps
         self.steps_per_iteration = steps_per_iteration
         self.delta_time = delta_time
-        self.illustration = AircraftIllustration()
+        self.illustration = AircraftIllustration(aircraft_model.__name__)
         self.create_cockpit()    
         self.restart_simulation() # create the plane
         self.paused = True
@@ -189,7 +193,7 @@ class GUIFlightSimulator() :
             self.single_step(None)
 
     def single_step(self, input):
-        self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)
+        self.simulate_multiple_time_steps(self.aircraft, self.steps_per_iteration, self.delta_time)        
         self.update_display()    
         self.illustration.fig.canvas.draw()
     
