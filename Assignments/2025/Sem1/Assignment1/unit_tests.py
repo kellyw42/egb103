@@ -1,4 +1,5 @@
 from tecnam import TecnamP92
+from cessna import Cessna172
 from IPython.display import display, HTML
 
 test_aircraft = [
@@ -72,6 +73,7 @@ update_tests = {
 
 import ast
 from tecnam import TecnamP92
+from cessna import Cessna172
 from collections.abc import Iterable
 import inspect
 import math
@@ -89,7 +91,7 @@ def test_equal(x, y) :
             if not test_equal(x[i], y[i]) :
                 return False
         return True
-    elif isinstance(x, TecnamP92) and isinstance(y, TecnamP92):
+    elif (isinstance(x, TecnamP92) and isinstance(y, TecnamP92)) or (isinstance(x, Cessna172) and isinstance(y, Cessna172)):
         return compare_aircraft(x, y)        
     else :
         return (x == y) 
@@ -211,7 +213,8 @@ def run_test(function, aircraft_src, extra_args_src, expected_result, expected_u
                     actual = getattr(aircraft, attr)
                     if  actual != expected :
                         print(f'test_aircraft.{attr} has value {actual}, but should be {expected}')
-        explain_debug()    
+        if explain:
+            explain_debug()    
         return False
     
     return True
