@@ -307,12 +307,7 @@ def criteria2c(ASTs):
     print()    
 
 def criteria2d(ASTs):
-    Heading('Assessment Criteria 2d: Use markdown cells to record your observations')   
-    print('* This assessment criteria is marked manually by your tutors')
-    print()
-
-def criteria2e(ASTs):
-    Heading('Assessment Criteria 2e: Use of assignment statements')   
+    Heading('Assessment Criteria 2d: Use of assignment statements')   
     if assignment_statements(ASTs):
         Pass(f'Criteria fully satisfied ')
     else :
@@ -344,8 +339,7 @@ def assess_part_b_and_c_of_assessment_criteria(*function_list):
     criteria2a(ASTs) # if statements
     criteria2b(ASTs) # loops
     criteria2c(ASTs) # calls
-    criteria2d(ASTs) # markdown
-    criteria2e(ASTs) # assignment 
+    criteria2d(ASTs) # assignment
 
     display(HTML('<hr>')) 
     Heading('Assessment Criteria 3: Ensure software is clear and maintainable')     
