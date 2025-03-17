@@ -83,10 +83,14 @@ def show_testcase(function, aircraft_src, extra_args_src) :
     print()
     print('Here is an example of a test case that you can try for yourself:')
     print()
+
+    if extra_args_src.endswith(','):
+        extra_args_src = extra_args_src[:-1]
+    
     if aircraft_src:
         print(f'test_aircraft = {aircraft_src}')
         if extra_args_src:
-            print(f'actual_result = {function.__name__}(test_aircraft,{extra_args_src[:-1]})')
+            print(f'actual_result = {function.__name__}(test_aircraft,{extra_args_src})')
         else:
             print(f'actual_result = {function.__name__}(test_aircraft)')
     else :
