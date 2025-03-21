@@ -1,0 +1,3306 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+        }
+        td {
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+<body><h1>Test 0</h1>
+<code>test_aircraft0 = TecnamP92()<br>simulate_one_time_step(test_aircraft0, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test0.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(0, 1000) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.87018738 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(0,0)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 1000 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1000}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 411.52263374485597 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.0}{\frac{411.52263374485597}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{288.15}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325.0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{101325.0}{287.05 \,\cdot\, 288.15} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.2250122659906946 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{411.52263374485597 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 43.094549431958754 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.0) \,\cdot\, 1.2250122659906946 \,\cdot\, + 43.094549431958754^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0002990229885057471 \,\cdot\, 1.2250122659906946 \,\cdot\, + 43.094549431958754^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 10.850155068063646 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{10.850155068063646}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 4.465084390149649 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.87018738 - 4.465084390149649 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.4051029898503513 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1.4051029898503513}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 14.051029898503513 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1000 + 14.051029898503513\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1002.6835490366547 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5707963267948966 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03490658503988659 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03490658503988659 - 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03490658503988659 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.03490658503988659) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 12.2 \,\cdot\, 0.56 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \text{ since aircraft is stationary} \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 \text{ in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 1.5707963267948966 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.141592653589793 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 + 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 - 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 1.97 \,\cdot\, 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \text{ since aircraft is stationary} \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 \text{ in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 3.141592653589793 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 4.71238898038469 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 + -0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-0.0}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 + -0.0 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 + 0.0 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.0) \,\cdot\, 1.2250122659906946 \,\cdot\, 43.21019576857195^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.00435 \,\cdot\, 1.2250122659906946 \,\cdot\, 43.21019576857195^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 91.20090653921454 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 91.20090653921454 \text{ Newtons, in direction } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (91.20090653921454,0.0) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0\text{ Newtons in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,-0.0) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( |F_r| \)</td><td>=</td><td>\( \mu_r \,\cdot\, |F_g| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.04 \,\cdot\, -5880.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -235.20000000000002 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (91.20090653921454,0.0) + (0.0,0.0)(0.0,0.0) + (-0.0,-0.0)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (91.20090653921454,-5880.0) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(91.20090653921454,-5880.0)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.1520015108986909,-9.8) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,0) + (0.1520015108986909,-9.8) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0015200151089869091,-0.098) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,0) + (0.0015200151089869091,-0.098) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1.5200151089869091\text{e-}05,-0.00098) \)</td></tr>
+</table>
+<h3>Correct for on ground</h3>
+<p>\( \text{position corrected from }(1.5200151089869091\text{e-}05,-0.00098) \text{ to }(1.5200151089869091\text{e-}05,0) \)</p>
+<p>\( \text{linear velocity corrected from }(0.0015200151089869091,-0.098) \text{ to }(0.0015200151089869091,0) \)</p>
+<h1>Test 1</h1>
+<code>test_aircraft1 = TecnamP92(angular_velocity=9.462226495761285e-05, engine_rpm=5324.945824260662, linear_velocity=(2.5047676762937745, 0), pitch_angle_radians=1.6090582357960263e-05, position=(0.8547359555756816, 0), throttle=1.0, time_elapsed=1.8)<br>simulate_one_time_step(test_aircraft1, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test1.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(1.0, 5324.945824260662) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.71209985095138 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(2.5047676762937745,0)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.5047676762937745 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 5324.945824260662 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5324.945824260662}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2191.3357301484207 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2.5047676762937745}{\frac{2191.3357301484207}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.039414909360645504 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{288.15}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325.0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{101325.0}{287.05 \,\cdot\, 288.15} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.2250122659906946 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2191.3357301484207 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 229.47614104610344 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.039414909360645504) \,\cdot\, 1.2250122659906946 \,\cdot\, + 229.47614104610344^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.00029893370488046506 \,\cdot\, 1.2250122659906946 \,\cdot\, + 229.47614104610344^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 307.56480659405247 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{307.56480659405247}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.5698792568117 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.71209985095138 - 126.5698792568117 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.14222059413967258 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.14222059413967258}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.4222059413967258 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5324.945824260662 + 1.4222059413967258\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5325.217445587464 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5708124173772544 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03492267562224455 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(2.5047676762937745,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03492267562224455 - 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03492267562224455 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.03492267562224455) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 12.2 \,\cdot\, 0.5600737537967215 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 26.257319806705347 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 26.257319806705347 \text{ in direction normal to } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 26.257319806705347 \text{ in direction } 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1.6077971327735051\text{e-}15,26.257319806705347) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{26.257319806705347}^2}{0.5 \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8253719185357837 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8253719185357837 \text{ in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.8253719185357837,-0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1.6077971327735051\text{e-}15,26.257319806705347) + (-0.8253719185357837,-0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.8253719185357822,26.257319806705347) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-0.8253719185357822,26.257319806705347) \text{ in direction } 1.5708124173772544 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-0.8253719185357822,26.257319806705347) \text{ in direction } 3.141608744172151 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8249494228621047 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8249494228621047 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.44547268834553655 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.141608744172151 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 + 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 - 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(1.6090582357960263\text{e-}05) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 1.97 \,\cdot\, 9.219224590187834\text{e-}05 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0006979205128584067 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0006979205128584067 \text{ in direction normal to } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0006979205128584067 \text{ in direction } 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (4.273530610656634\text{e-}20,0.0006979205128584067) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{0.0006979205128584067}^2}{0.5 \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 7.9959388715436\text{e-}09 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 7.9959388715436\text{e-}09 \text{ in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-7.9959388715436\text{e-}09,-0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (4.273530610656634\text{e-}20,0.0006979205128584067) + (-7.9959388715436\text{e-}09,-0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-7.995938871500865\text{e-}09,0.0006979205128584067) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-7.995938871500865\text{e-}09,0.0006979205128584067) \text{ in direction } 3.141608744172151 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-7.995938871500865\text{e-}09,0.0006979205128584067) \text{ in direction } 4.712405070967048 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0006979205128967178 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0006979205128967178 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0027916820515868713 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.44547268834553655 + -0.0027916820515868713 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.4426810062939497 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.4426810062939497}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0004426810062939497 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 9.462226495761285\text{e-}05 + 0.0004426810062939497 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 9.904907502055234\text{e-}05 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.6090582357960263\text{e-}05 + 9.904907502055234\text{e-}05 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.7081073108165786\text{e-}05 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.03941289893945883) \,\cdot\, 1.2250122659906946 \,\cdot\, 229.48784644479804^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.004343242811777768 \,\cdot\, 1.2250122659906946 \,\cdot\, 229.48784644479804^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2568.448847895754 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2568.448847895754 \text{ Newtons, in direction } 1.7081073108165786\text{e-}05 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2568.448847521065,0.043871862543358196) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.2250122659906946 \,\cdot\, {2.5047676762937745}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.13834002271634122 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.13834002271634122\text{ Newtons in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.13834002271634122,-0.0) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( |F_r| \)</td><td>=</td><td>\( \mu_r \,\cdot\, |F_g| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.04 \,\cdot\, -5880.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -235.20000000000002 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( |F_r| \text{ in direction opposite horizontal direction of travel} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-235.20000000000002, 0) \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2568.448847521065,0.043871862543358196) + (-0.8253852998653534,26.257532654039995)(-9.010652539614161\text{e-}09,0.0007408825261023188) + (-0.13834002271634122,-0.0)(0,-5880.0) + (-235.20000000000002,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2332.2851221894725,-5853.69785460089) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(2332.2851221894725,-5853.69785460089)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (3.8871418703157876,-9.756163091001484) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2.5047676762937745,0) + (3.8871418703157876,-9.756163091001484) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2.5436390949969323,-0.09756163091001485) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.8547359555756816,0) + (2.5436390949969323,-0.09756163091001485) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.8801723465256509,-0.0009756163091001486) \)</td></tr>
+</table>
+<h3>Correct for on ground</h3>
+<p>\( \text{position corrected from }(0.8801723465256509,-0.0009756163091001486) \text{ to }(0.8801723465256509,0) \)</p>
+<p>\( \text{linear velocity corrected from }(2.5436390949969323,-0.09756163091001485) \text{ to }(2.5436390949969323,0) \)</p>
+<h1>Test 2</h1>
+<code>test_aircraft2 = TecnamP92(angular_velocity=0.1645214403696835, engine_rpm=5491.802723731343, linear_velocity=(2.3292949232141194, 17.899852673407583), pitch_angle_radians=1.5387410399488646, position=(1797.8474288628177, 514.0760387844257), stabilizer_angle_radians=-0.10297442586766545, throttle=1.0, time_elapsed=58.197)<br>simulate_one_time_step(test_aircraft2, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test2.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(1.0, 5491.802723731343) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.17328228000642 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(2.3292949232141194,17.899852673407583)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 18.050771190423074 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 5491.802723731343 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5491.802723731343}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2260.0011208770957 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{18.050771190423074}{\frac{2260.0011208770957}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.27541596334920915 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 514.0760387844257 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 514.0760387844257 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 284.8085057479012 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{284.8085057479012}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 95303.72052918143 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{95303.72052918143}{287.05 \,\cdot\, 284.8085057479012} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.1657336923917203 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2260.0011208770957 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 236.66676394840607 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.27541596334920915) \,\cdot\, 1.1657336923917203 \,\cdot\, + 236.66676394840607^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.00029466356592715103 \,\cdot\, 1.1657336923917203 \,\cdot\, + 236.66676394840607^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 306.8644477206299 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{306.8644477206299}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.28166572865429 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.17328228000642 - 126.28166572865429 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.10838344864787075 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-0.10838344864787075}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1.0838344864787075 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5491.802723731343 + -1.0838344864787075\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5491.595726592122 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5387410399488646 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.109537366743761 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5387410399488646 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5736476249887512 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(2.3292949232141194,17.899852673407583) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.4413941943199284 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5736476249887512 - 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.13225343066882278 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.13225343066882278) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 12.2 \,\cdot\, 1.0062050722759672 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2331.3485527233875 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2331.3485527233875 \text{ in direction normal to } 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2331.3485527233875 \text{ in direction } 3.012190521114825 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2311.8566616284575,300.8402406087946) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{2331.3485527233875}^2}{0.5 \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 131.65816099321947 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 131.65816099321947 \text{ in direction away from } 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-16.9893398329662,-130.5573961449771) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2311.8566616284575,300.8402406087946) + (-16.9893398329662,-130.5573961449771) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2328.846001461424,170.2828444638175) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-2328.846001461424,170.2828444638175) \text{ in direction } 3.109537366743761 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-2328.846001461424,170.2828444638175) \text{ in direction } 4.680333693538658 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -95.55632300410812 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -95.55632300410812 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -51.60041442221839 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5387410399488646 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 4.680333693538658 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5387410399488646 + -0.10297442586766545 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.435766614081199 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.435766614081199 - 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.005627580238729335 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(-0.005627580238729335) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 1.97 \,\cdot\, -0.03224365965504152 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -12.063447262790708 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -12.063447262790708 \text{ in direction normal to } 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -12.063447262790708 \text{ in direction } 3.012190521114825 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (11.962587440692863,-1.5566828790444098) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{-12.063447262790708}^2}{0.5 \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.04833757574287424 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.04833757574287424 \text{ in direction away from } 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.006237543459533267,-0.04793343593243174) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (11.962587440692863,-1.5566828790444098) + (-0.006237543459533267,-0.04793343593243174) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (11.956349897233329,-1.6046163149768415) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (11.956349897233329,-1.6046163149768415) \text{ in direction } 4.680333693538658 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (11.956349897233329,-1.6046163149768415) \text{ in direction } 6.251130020333554 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 12.001635228733385 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 12.001635228733385 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 48.00654091493354 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -51.60041442221839 + 48.00654091493354 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -3.5938735072848544 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-3.5938735072848544}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0035938735072848543 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.1645214403696835 + -0.0035938735072848543 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.16448550163461065 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5387410399488646 + 0.16448550163461065 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5403858949652107 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.27542634472455924) \,\cdot\, 1.1657336923917203 \,\cdot\, 236.6578434999577^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.004020010429547757 \,\cdot\, 1.1657336923917203 \,\cdot\, 236.6578434999577^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2405.8321668332114 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2405.8321668332114 \text{ Newtons, in direction } 1.5403858949652107 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (73.15111892945775,2404.7198025484704) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.1657336923917203 \,\cdot\, {18.050771190423074}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 6.8369653080856985 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 6.8369653080856985\text{ Newtons in direction away from } 1.4413941943199284 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.8822508697447968,-6.779802948965546) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (73.15111892945775,2404.7198025484704) + (-2346.424218916462,170.57317579871815)(8.462983261040403,-1.1256964458123806) + (-0.8822508697447968,-6.779802948965546)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2265.6923675957087,-3312.6125210475893) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(-2265.6923675957087,-3312.6125210475893)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-3.776153945992848,-5.521020868412649) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2.3292949232141194,17.899852673407583) + (-3.776153945992848,-5.521020868412649) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2.291533383754191,17.844642464723456) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1797.8474288628177,514.0760387844257) + (2.291533383754191,17.844642464723456) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1797.8703441966552,514.254485209073) \)</td></tr>
+</table>
+<h1>Test 3</h1>
+<code>test_aircraft3 = TecnamP92(angular_velocity=-0.3601050669912345, engine_rpm=5469.66892738982, linear_velocity=(6.700791955156834, -8.46798919852018), pitch_angle_radians=0.42213798000369585, position=(1805.188577984907, 537.0330849941952), stabilizer_angle_radians=0.1937315469713706, throttle=1.0, time_elapsed=62.396)<br>simulate_one_time_step(test_aircraft3, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test3.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(1.0, 5469.66892738982) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.2605204690675 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(6.700791955156834,-8.46798919852018)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 10.798493130643228 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 5469.66892738982 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5469.66892738982}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2250.89256271186 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{10.798493130643228}{\frac{2250.89256271186}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.1654285230044595 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 537.0330849941952 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 537.0330849941952 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 284.6592849475377 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{284.6592849475377}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 95041.74685991208 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{95041.74685991208}{287.05 \,\cdot\, 284.6592849475377} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.163138697009185 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2250.89256271186 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 235.71291796784942 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.1654285230044595) \,\cdot\, 1.163138697009185 \,\cdot\, + 235.71291796784942^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0002974501956193427 \,\cdot\, 1.163138697009185 \,\cdot\, + 235.71291796784942^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 306.5905562306123 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{306.5905562306123}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.16895318132194 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 126.2605204690675 - 126.16895318132194 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.091567287745562 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.091567287745562}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.91567287745562 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5469.66892738982 + 0.91567287745562\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5469.843808027463 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.42213798000369585 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.9929343067985923 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.42213798000369585 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.45704456504358243 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(6.700791955156834,-8.46798919852018) \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.9013775854875181 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.45704456504358243 - -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.3584221505311005 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(1.3584221505311005) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 12.2 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 0.6694187413073784 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{0.0}^2}{0.5 \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction away from } -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (-0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 1.9929343067985923 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 3.563730633593489 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.42213798000369585 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.563730633593489 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.42213798000369585 + 0.1937315469713706 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.6158695269750665 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.6158695269750665 - -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5172471124625846 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(1.5172471124625846) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 1.97 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 0.6694187413073784 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{0.0}^2}{0.5 \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction away from } -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (-0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 3.563730633593489 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 5.134526960388385 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 + 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.0}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.3601050669912345 + 0.0 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.3601050669912345 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.42213798000369585 + -0.3601050669912345 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.4185369293337835 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.16542323396027428) \,\cdot\, 1.163138697009185 \,\cdot\, 235.72045437013296^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.004230962918447641 \,\cdot\, 1.163138697009185 \,\cdot\, 235.72045437013296^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2506.4685289805657 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2506.4685289805657 \text{ Newtons, in direction } 0.4185369293337835 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2290.121557932968,1018.6892247691039) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.163138697009185 \,\cdot\, {10.798493130643228}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.441351555678485 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.441351555678485\text{ Newtons in direction away from } -0.9013775854875181 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1.514932561986597,1.9144651344557007) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2290.121557932968,1018.6892247691039) + (0.0,0.0)(0.0,0.0) + (-1.514932561986597,1.9144651344557007)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2288.6066253709814,-4859.39631009644) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(2288.6066253709814,-4859.39631009644)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (3.8143443756183024,-8.098993850160735) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (6.700791955156834,-8.46798919852018) + (3.8143443756183024,-8.098993850160735) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (6.738935398913017,-8.548979137021787) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1805.188577984907,537.0330849941952) + (6.738935398913017,-8.548979137021787) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1805.255967338896,536.9475952028249) \)</td></tr>
+</table>
+<h1>Test 4</h1>
+<code>test_aircraft4 = TecnamP92(angular_velocity=2.5462461874185127, engine_rpm=5789.881024080416, linear_velocity=(39.59202073532071, -43.20742419924472), pitch_angle_radians=-0.6335645532198284, position=(1886.9970724837021, 388.531086940641), stabilizer_angle_radians=-0.2792526803190927, throttle=1.0, time_elapsed=67.196)<br>simulate_one_time_step(test_aircraft4, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test4.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(1.0, 5789.881024080416) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 124.52873489855588 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(39.59202073532071,-43.20742419924472)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 58.60383615293066 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 5789.881024080416 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5789.881024080416}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2382.6670880989363 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{58.60383615293066}{\frac{2382.6670880989363}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8481344063556573 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 388.531086940641 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 388.531086940641 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 285.6245479348858 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{285.6245479348858}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 96746.7345806474 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{96746.7345806474}{287.05 \,\cdot\, 285.6245479348858} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.1800033337431777 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2382.6670880989363 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 249.51231399739342 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.8481344063556573) \,\cdot\, 1.1800033337431777 \,\cdot\, + 249.51231399739342^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0002576820706181458 \,\cdot\, 1.1800033337431777 \,\cdot\, + 249.51231399739342^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 301.92400595598485 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{301.92400595598485}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 124.24856212180445 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 124.52873489855588 - 124.24856212180445 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.28017277675142793 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.28017277675142793}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.8017277675142793 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5789.881024080416 + 2.8017277675142793\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5790.416114668493 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.9372317735750681 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.5986579681799418 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(39.59202073532071,-43.20742419924472) \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.8290350306135054 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.5986579681799418 - -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2303770624335636 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.2303770624335636) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 12.2 \,\cdot\, 1.4559706699252049 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 35992.9784640703 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 35992.9784640703 \text{ in direction normal to } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 35992.9784640703 \text{ in direction } 0.7417612961813912 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (26536.895718448533,24316.40730747896) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{35992.9784640703}^2}{0.5 \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2941.199522358652 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2941.199522358652 \text{ in direction away from } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1987.037711525575,2168.4869755887325) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (26536.895718448533,24316.40730747896) + (-1987.037711525575,2168.4869755887325) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (24549.858006922957,26484.894283067693) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (24549.858006922957,26484.894283067693) \text{ in direction } 0.9372317735750681 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (24549.858006922957,26484.894283067693) \text{ in direction } 2.5080281003699647 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -4105.658403789647 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -4105.658403789647 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2217.0555380464098 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.5080281003699647 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + -0.2792526803190927 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.9128172335389211 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.9128172335389211 - -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.08378220292541572 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(-0.08378220292541572) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 1.97 \,\cdot\, -0.480036662593494 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1916.2226240569323 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1916.2226240569323 \text{ in direction normal to } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1916.2226240569323 \text{ in direction } 0.7417612961813912 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1412.7922199795669,-1294.576103638887) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{-1916.2226240569323}^2}{0.5 \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 114.3113828081542 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 114.3113828081542 \text{ in direction away from } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-77.22734441160465,84.27947267658816) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1412.7922199795669,-1294.576103638887) + (-77.22734441160465,84.27947267658816) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1490.0195643911716,-1210.2966309622989) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1490.0195643911716,-1210.2966309622989) \text{ in direction } 2.5080281003699647 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1490.0195643911716,-1210.2966309622989) \text{ in direction } 4.078824427164861 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1857.5283636995885 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1857.5283636995885 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 7430.113454798354 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2217.0555380464098 + 7430.113454798354 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5213.0579167519445 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5213.0579167519445}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.213057916751945 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.5462461874185127 + 5.213057916751945 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.598376766586032 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 2.598376766586032 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6075807855539681 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.8480560305137007) \,\cdot\, 1.1800033337431777 \,\cdot\, 249.53537348519188^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0012214842156256516 \,\cdot\, 1.1800033337431777 \,\cdot\, 249.53537348519188^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 822.6826232888254 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 822.6826232888254 \text{ Newtons, in direction } -0.6075807855539681 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (675.4483541415901,-469.6554264019531) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 72.94706624538492 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 72.94706624538492\text{ Newtons in direction away from } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-49.28212808170688,53.78239791555239) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (675.4483541415901,-469.6554264019531) + (26382.237877606363,28843.298893073534)(-1011.3899260294866,-852.9733499106427) + (-49.28212808170688,53.78239791555239)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (25997.01417763676,21694.452514676486) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(25997.01417763676,21694.452514676486)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (43.32835696272794,36.15742085779414) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (39.59202073532071,-43.20742419924472) + (43.32835696272794,36.15742085779414) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (40.02530430494799,-42.84584999066678) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1886.9970724837021,388.531086940641) + (40.02530430494799,-42.84584999066678) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1887.3973255267517,388.10262844073435) \)</td></tr>
+</table>
+<h1>Test 5</h1>
+<code>test_aircraft5 = TecnamP92(angular_velocity=-1.4479315865978675, engine_rpm=5800, linear_velocity=(40.81904228175883, -56.020830283261), pitch_angle_radians=-2.112939056059267, position=(1950.0811530507483, 316.9117787679673), stabilizer_angle_radians=-0.2792526803190927, throttle=1.0, time_elapsed=68.696)<br>simulate_one_time_step(test_aircraft5, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test5.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(1.0, 5800) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 124.45756 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(40.81904228175883,-56.020830283261)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 69.31470001685031 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 5800 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5800}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2386.8312757201643 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{69.31470001685031}{\frac{2386.8312757201643}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.0013954877583013 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 316.9117787679673 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 316.9117787679673 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 286.0900734380082 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{286.0900734380082}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 97577.81771810376 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{97577.81771810376}{287.05 \,\cdot\, 286.0900734380082} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.1882033177099898 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2386.8312757201643 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 249.94838670536075 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(1.0013954877583013) \,\cdot\, 1.1882033177099898 \,\cdot\, + 249.94838670536075^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.00024139121132743182 \,\cdot\, 1.1882033177099898 \,\cdot\, + 249.94838670536075^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 285.797964959147 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{285.797964959147}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 117.61233125890823 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 124.45756 - 117.61233125890823 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 6.845228741091773 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{6.845228741091773}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 68.45228741091773 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5800 + 68.45228741091773\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5813.073423888874 \)</td></tr>
+<tr><td></td><td>=</td><td>\(  &= 5800 \text{ reduced to max TecnamP92 engine RPM} \\ \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.112939056059267 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.5421427292643703 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.112939056059267 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.0780324710193803 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(40.81904228175883,-56.020830283261) \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.9411060658643418 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.0780324710193803 - -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1.1369264051550385 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(-1.1369264051550385) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 12.2 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 0.6296902609305548 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{0.0}^2}{0.5 \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction away from } -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (-0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } -0.5421427292643703 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 1.0286535975305262 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.112939056059267 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.0286535975305262 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.112939056059267 + -0.2792526803190927 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.3921917363783596 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.3921917363783596 - -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1.4510856705140178 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(-1.4510856705140178) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 1.97 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 0.6296902609305548 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{0.0}^2}{0.5 \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction away from } -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (-0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 1.0286535975305262 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 2.5994499243254228 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 + -0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.0}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1.4479315865978675 + 0.0 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1.4479315865978675 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.112939056059267 + -1.4479315865978675 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2.1274183719252457 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(1.0013954877583013) \,\cdot\, 1.1882033177099898 \,\cdot\, 249.94838670536075^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -1.2149214626684608\text{e-}05 \,\cdot\, 1.1882033177099898 \,\cdot\, 249.94838670536075^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -8.266784833280058 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( -8.266784833280058 \text{ Newtons, in direction } -2.1274183719252457 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (4.3675175449358425,7.018868995388558) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.1882033177099898 \,\cdot\, {69.31470001685031}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 102.75760224012697 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 102.75760224012697\text{ Newtons in direction away from } -0.9411060658643418 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-60.51338185972428,83.04971664033141) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (4.3675175449358425,7.018868995388558) + (0.0,0.0)(0.0,0.0) + (-60.51338185972428,83.04971664033141)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-56.14586431478843,-5789.93141436428) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(-56.14586431478843,-5789.93141436428)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.09357644052464739,-9.649885690607134) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (40.81904228175883,-56.020830283261) + (-0.09357644052464739,-9.649885690607134) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (40.818106517353584,-56.11732914016707) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1950.0811530507483,316.9117787679673) + (40.818106517353584,-56.11732914016707) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1950.4893341159218,316.35060547656565) \)</td></tr>
+</table>
+<h1>Test 6</h1>
+<code>test_aircraft6 = TecnamP92(angular_velocity=0.03397972101623799, engine_rpm=4875.897336540748, linear_velocity=(22.2882025836437, 10.012123108247119), pitch_angle_radians=0.5759732753508979, position=(256.7063983204896, 30.26187784869959), stabilizer_angle_radians=-0.16755160819145562, throttle=0.777, time_elapsed=14.697)<br>simulate_one_time_step(test_aircraft6, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test6.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(0.777, 4875.897336540748) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 102.20669446852743 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(22.2882025836437,10.012123108247119)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 24.433718168634048 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 4875.897336540748 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{4875.897336540748}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2006.5421138027768 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{24.433718168634048}{\frac{2006.5421138027768}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.4198974943108424 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 30.26187784869959 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 30.26187784869959 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 287.95329779398344 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{287.95329779398344}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 100962.22942392105 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{100962.22942392105}{287.05 \,\cdot\, 287.95329779398344} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.2214602101665812 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2006.5421138027768 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 210.1245987947113 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.4198974943108424) \,\cdot\, 1.2214602101665812 \,\cdot\, + 210.1245987947113^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0002888900054179009 \,\cdot\, 1.2214602101665812 \,\cdot\, + 210.1245987947113^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 248.49169416241025 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{248.49169416241025}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 102.25995644543632 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 102.20669446852743 - 102.25995644543632 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.053261976908885345 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-0.053261976908885345}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.5326197690888534 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 4875.897336540748 + -0.5326197690888534\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 4875.795613657901 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5759732753508979 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.1467696021457945 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5759732753508979 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.6108798603907846 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(22.2882025836437,10.012123108247119) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.42219824664764904 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.6108798603907846 - 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.18868161374313552 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.18868161374313552) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 12.2 \,\cdot\, 1.2648528111359405 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5626.369754941989 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5626.369754941989 \text{ in direction normal to } 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5626.369754941989 \text{ in direction } 1.9929945734425456 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2305.4987476818624,5132.320346954518) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{5626.369754941989}^2}{0.5 \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 399.41312685555147 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 399.41312685555147 \text{ in direction away from } 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-364.340810697858,-163.66618332617304) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2305.4987476818624,5132.320346954518) + (-364.340810697858,-163.66618332617304) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2669.8395583797205,4968.654163628345) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-2669.8395583797205,4968.654163628345) \text{ in direction } 2.1467696021457945 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-2669.8395583797205,4968.654163628345) \text{ in direction } 3.717565928940691 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -467.08934392931036 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -467.08934392931036 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -252.22824572182762 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5759732753508979 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.717565928940691 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5759732753508979 + -0.16755160819145562 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.4084216671594423 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.4084216671594423 - 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.013776579488206764 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(-0.013776579488206764) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 1.97 \,\cdot\, -0.07893398608007474 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -56.696821149154374 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -56.696821149154374 \text{ in direction normal to } 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -56.696821149154374 \text{ in direction } 1.9929945734425456 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (23.232467088055017,-51.718294649201646) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{-56.696821149154374}^2}{0.5 \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5561498850548799 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5561498850548799 \text{ in direction away from } 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.5073145732230687,-0.22789168137966748) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (23.232467088055017,-51.718294649201646) + (-0.5073145732230687,-0.22789168137966748) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (22.725152514831947,-51.94618633058131) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (22.725152514831947,-51.94618633058131) \text{ in direction } 3.717565928940691 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (22.725152514831947,-51.94618633058131) \text{ in direction } 5.288362255735588 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 55.942607715966645 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 55.942607715966645 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 223.77043086386658 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -252.22824572182762 + 223.77043086386658 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -28.45781485796104 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-28.45781485796104}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.02845781485796104 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03397972101623799 + -0.02845781485796104 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03369514286765838 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5759732753508979 + 0.03369514286765838 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5763102267795746 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.4199062545598368) \,\cdot\, 1.2214602101665812 \,\cdot\, 210.12021509290807^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0035830025076096536 \,\cdot\, 1.2214602101665812 \,\cdot\, 210.12021509290807^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1771.1653313622721 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1771.1653313622721 \text{ Newtons, in direction } 0.5763102267795746 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1485.0849985744267,965.1679532748809) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.2214602101665812 \,\cdot\, {24.433718168634048}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 13.125956166121984 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 13.125956166121984\text{ Newtons in direction away from } 0.42219824664764904 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-11.973370901450036,-5.37857922980273) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1485.0849985744267,965.1679532748809) + (-2673.54504286219,4974.521137760823)(22.181438950063654,-50.67023448576707) + (-11.973370901450036,-5.37857922980273)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1178.2519762391494,3.6402773201343734) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(-1178.2519762391494,3.6402773201343734)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1.9637532937319158,0.006067128866890622) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (22.2882025836437,10.012123108247119) + (-1.9637532937319158,0.006067128866890622) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (22.26856505070638,10.012183779535787) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (256.7063983204896,30.26187784869959) + (22.26856505070638,10.012183779535787) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (256.92908397099666,30.361999686494947) \)</td></tr>
+</table>
+<h1>Test 7</h1>
+<code>test_aircraft7 = TecnamP92(angular_velocity=-0.01490415703929847, engine_rpm=3601.7943442586134, linear_velocity=(25.348417258520143, 2.624451225922511), pitch_angle_radians=0.2730575554235457, position=(842.996063815359, 3.4635132479641855), stabilizer_angle_radians=-0.16755160819145562, throttle=0.38400000000000006, time_elapsed=39.597)<br>simulate_one_time_step(test_aircraft7, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test7.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(0.38400000000000006, 3601.7943442586134) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 53.96503823035123 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(25.348417258520143,2.624451225922511)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 25.48391653080994 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 3601.7943442586134 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{3601.7943442586134}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1482.219894756631 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{25.48391653080994}{\frac{1482.219894756631}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5928646252491483 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 3.4635132479641855 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 3.4635132479641855 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.1274871638882 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{288.1274871638882}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101283.4270136369 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{101283.4270136369}{287.05 \,\cdot\, 288.1274871638882} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.2246053284910092 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1482.219894756631 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 155.21770441240227 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.5928646252491483) \,\cdot\, 1.2246053284910092 \,\cdot\, + 155.21770441240227^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.00027882250207633257 \,\cdot\, 1.2246053284910092 \,\cdot\, + 155.21770441240227^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 131.20570484957236 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{131.20570484957236}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 53.994117222046235 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 53.96503823035123 - 53.994117222046235 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.029078991695001832 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-0.029078991695001832}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.2907899169500183 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3601.7943442586134 + -0.2907899169500183\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3601.7388074753926 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2730575554235457 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.8438538822184423 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2730575554235457 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.3079641404634323 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(25.348417258520143,2.624451225922511) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.10316752469105317 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.3079641404634323 - 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.20479661577237912 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.20479661577237912) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 12.2 \,\cdot\, 1.3387185393855738 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 6494.528178979069 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 6494.528178979069 \text{ in direction normal to } 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 6494.528178979069 \text{ in direction } 1.6739638514859498 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-668.8364569277688,6459.9964443827275) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{6494.528178979069}^2}{0.5 \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 487.96756678290427 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 487.96756678290427 \text{ in direction away from } 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-485.37301856578983,-50.253149954620255) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-668.8364569277688,6459.9964443827275) + (-485.37301856578983,-50.253149954620255) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1154.2094754935588,6409.743294428107) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1154.2094754935588,6409.743294428107) \text{ in direction } 1.8438538822184423 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1154.2094754935588,6409.743294428107) \text{ in direction } 3.414650209013339 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -617.1131473635216 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -617.1131473635216 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -333.24109957630174 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2730575554235457 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.414650209013339 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2730575554235457 + -0.16755160819145562 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.10550594723209009 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.10550594723209009 - 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0023384225410369164 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(0.0023384225410369164) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 1.97 \,\cdot\, 0.013398174231967286 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 10.49567427618037 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 10.49567427618037 \text{ in direction normal to } 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 10.49567427618037 \text{ in direction } 1.6739638514859498 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1.0808929305549524,10.439868245545567) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{10.49567427618037}^2}{0.5 \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.017475317409551144 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.017475317409551144 \text{ in direction away from } 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.017382400263587155,-0.0017996887622604319) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1.0808929305549524,10.439868245545567) + (-0.017382400263587155,-0.0017996887622604319) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1.0982753308185396,10.438068556783307) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1.0982753308185396,10.438068556783307) \text{ in direction } 3.414650209013339 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1.0982753308185396,10.438068556783307) \text{ in direction } 4.985446535808236 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -10.34752651422579 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -10.34752651422579 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -41.39010605690316 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -333.24109957630174 + -41.39010605690316 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -374.6312056332049 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-374.6312056332049}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.3746312056332049 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.01490415703929847 + -0.3746312056332049 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.01865046909563052 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2730575554235457 + -0.01865046909563052 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2728710507325894 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.5928737668876546) \,\cdot\, 1.2246053284910092 \,\cdot\, 155.21531107975247^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0028209780299335275 \,\cdot\, 1.2246053284910092 \,\cdot\, 155.21531107975247^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 762.8900682751506 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 762.8900682751506 \text{ Newtons, in direction } 0.2728710507325894 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (734.6639945990516,205.5968660087713) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.2246053284910092 \,\cdot\, {25.48391653080994}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 14.315317931233865 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 14.315317931233865\text{ Newtons in direction away from } 0.10316752469105317 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-14.239202662219617,-1.474257445815891) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (734.6639945990516,205.5968660087713) + (-1153.1626741610717,6405.682251397015)(-1.0094048064535612,9.60569552062225) + (-14.239202662219617,-1.474257445815891)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-433.7472870306932,739.4105554805919) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(-433.7472870306932,739.4105554805919)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.7229121450511554,1.2323509258009866) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (25.348417258520143,2.624451225922511) + (-0.7229121450511554,1.2323509258009866) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (25.341188137069633,2.636774735180521) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (842.996063815359,3.4635132479641855) + (25.341188137069633,2.636774735180521) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (843.2494756967296,3.489880995315991) \)</td></tr>
+</table>
+<h1>Test 8</h1>
+<code>test_aircraft8 = TecnamP92(angular_velocity=2.316797479594637e-08, engine_rpm=1274.5967848636499, pitch_angle_radians=5.3949531555335793e-08, position=(0.004002432380726907, 0), stabilizer_angle_radians=-0.07853981633974483, time_elapsed=5.099)<br>simulate_one_time_step(test_aircraft8, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test8.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(0, 1274.5967848636499) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 7.257837429312109 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(0,0)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 1274.5967848636499 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1274.5967848636499}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 524.5254258698147 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.0}{\frac{524.5254258698147}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{288.15}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325.0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{101325.0}{287.05 \,\cdot\, 288.15} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.2250122659906946 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{524.5254258698147 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 54.92817415112225 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.0) \,\cdot\, 1.2250122659906946 \,\cdot\, + 54.92817415112225^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0002990229885057471 \,\cdot\, 1.2250122659906946 \,\cdot\, + 54.92817415112225^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 17.62712898233998 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{17.62712898233998}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 7.253962544172831 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 7.257837429312109 - 7.253962544172831 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.003874885139278028 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.003874885139278028}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03874885139278028 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1274.5967848636499 + 0.03874885139278028\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1274.6041853491358 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.3949531555335793\text{e-}08 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.570796380744428 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.3949531555335793\text{e-}08 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03490663898941815 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03490663898941815 - 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.03490663898941815 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.03490663898941815) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 12.2 \,\cdot\, 0.5600002472864372 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction normal to } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \text{ in direction } 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \text{ since aircraft is stationary} \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 \text{ in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) + (0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 1.570796380744428 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 3.1415927075393246 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.3949531555335793\text{e-}08 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.1415927075393246 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.3949531555335793\text{e-}08 + -0.07853981633974483 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.07853976239021328 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.07853976239021328 - 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.07853976239021328 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(-0.07853976239021328) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 1.97 \,\cdot\, -0.4499996908919536 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \text{ in direction normal to } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 \text{ in direction } 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,-0.0) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \text{ since aircraft is stationary} \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0 \text{ in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,-0.0) + (0.0,0.0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0,0.0) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 3.1415927075393246 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (0.0,0.0) \text{ in direction } 4.712389034334221 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.0 + 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{0.0}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.316797479594637\text{e-}08 + 0.0 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.316797479594637\text{e-}08 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.3949531555335793\text{e-}08 + 2.316797479594637\text{e-}08 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5.418121130329526\text{e-}08 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.0) \,\cdot\, 1.2250122659906946 \,\cdot\, 54.928493071709845^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.00435 \,\cdot\, 1.2250122659906946 \,\cdot\, 54.928493071709845^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 147.37440223346297 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 147.37440223346297 \text{ Newtons, in direction } 5.418121130329526\text{e-}08 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (147.37440223346277,7.984923628108082\text{e-}06) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.2250122659906946 \,\cdot\, {0.0}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0\text{ Newtons in direction away from } 0.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.0,-0.0) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( |F_r| \)</td><td>=</td><td>\( \mu_r \,\cdot\, |F_g| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.04 \,\cdot\, -5880.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -235.20000000000002 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (147.37440223346277,7.984923628108082\text{e-}06) + (0.0,0.0)(0.0,0.0) + (-0.0,-0.0)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (147.37440223346277,-5879.999992015077) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(147.37440223346277,-5879.999992015077)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.24562400372243798,-9.799999986691795) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,0) + (0.24562400372243798,-9.799999986691795) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.00245624003722438,-0.09799999986691794) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.004002432380726907,0) + (0.00245624003722438,-0.09799999986691794) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0.0040269947810991505,-0.0009799999986691795) \)</td></tr>
+</table>
+<h3>Correct for on ground</h3>
+<p>\( \text{position corrected from }(0.0040269947810991505,-0.0009799999986691795) \text{ to }(0.0040269947810991505,0) \)</p>
+<p>\( \text{linear velocity corrected from }(0.00245624003722438,-0.09799999986691794) \text{ to }(0.00245624003722438,0) \)</p>
+<h1>Test 9</h1>
+<code>test_aircraft9 = TecnamP92(angular_velocity=-0.008569412357370453, engine_rpm=2913.6305800661235, linear_velocity=(24.396185426677608, 0.9305979895790267), pitch_angle_radians=0.20287459547633346, position=(1912.6724958372301, 180.34367644747098), stabilizer_angle_radians=-0.18151424220741028, throttle=0.223, time_elapsed=83.997)<br>simulate_one_time_step(test_aircraft9, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test9.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{TecnamP92.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.engine_torque}(0.223, 2913.6305800661235) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 33.6843328954465 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(24.396185426677608,0.9305979895790267)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 24.413927909925626 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 2913.6305800661235 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{2913.6305800661235}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1199.0249300683636 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{24.413927909925626}{\frac{1199.0249300683636}{60} \,\cdot\, 1.74} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.7021201661360653 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 180.34367644747098 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 180.34367644747098 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 286.9777661030914 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{286.9777661030914}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 99178.59689922619 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{99178.59689922619}{287.05 \,\cdot\, 286.9777661030914} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.2039602767160136 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1199.0249300683636 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 125.56159705912621 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_torque_coefficient}(0.7021201661360653) \,\cdot\, 1.2039602767160136 \,\cdot\, + 125.56159705912621^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0002706912225462681 \,\cdot\, 1.2039602767160136 \,\cdot\, + 125.56159705912621^2 \,\cdot\, 1.74^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 81.94948620758665 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{81.94948620758665}{2.43} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 33.7240683981838 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( 33.6843328954465 - 33.7240683981838 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.039735502737300976 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-0.039735502737300976}{0.1} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.39735502737300976 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2913.6305800661235 + -0.39735502737300976\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2913.554690846001 \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.20287459547633346 + 1.5707963267948966 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.7736709222712301 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.20287459547633346 + 0.03490658503988659 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.23778118051622005 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(24.396185426677608,0.9305979895790267) \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.038126740261677436 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.23778118051622005 - 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.1996544402545426 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 12.2 \,\cdot\, \text{TecnamP92.wing_lift_coefficient}(0.1996544402545426) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 12.2 \,\cdot\, 1.3151485430105714 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5756.94548522167 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5756.94548522167 \text{ in direction normal to } 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5756.94548522167 \text{ in direction } 1.608923067056574 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-219.44039133847212,5752.761704995557) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{5756.94548522167}^2}{0.5 \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 12.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 424.9335279752917 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 424.9335279752917 \text{ in direction away from } 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-424.6247134318295,-16.197405362115457) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-219.44039133847212,5752.761704995557) + (-424.6247134318295,-16.197405362115457) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-644.0651047703016,5736.564299633442) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-644.0651047703016,5736.564299633442) \text{ in direction } 1.7736709222712301 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-644.0651047703016,5736.564299633442) \text{ in direction } 3.3444672490661267 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -524.9799991496093 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -524.9799991496093 \,\cdot\, 0.54 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -283.48919954078906 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.20287459547633346 + 3.141592653589793 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3.3444672490661267 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.20287459547633346 + -0.18151424220741028 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.021360353268923188 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.021360353268923188 - 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.016766386992754248 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 1.97 \,\cdot\, \text{TecnamP92.stabilizer_lift_coefficient}(-0.016766386992754248) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 1.97 \,\cdot\, -0.09606432123678588 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -67.90250915980108 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -67.90250915980108 \text{ in direction normal to } 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -67.90250915980108 \text{ in direction } 1.608923067056574 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2.5882741500924937,-67.85316195374268) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{-67.90250915980108}^2}{0.5 \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 1.97 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.6 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8106195033634344 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.8106195033634344 \text{ in direction away from } 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.8100303968906043,-0.030898791989832627) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (2.5882741500924937,-67.85316195374268) + (-0.8100303968906043,-0.030898791989832627) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1.7782437532018895,-67.88406074573251) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (1.7782437532018895,-67.88406074573251) \text{ in direction } 3.3444672490661267 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (1.7782437532018895,-67.88406074573251) \text{ in direction } 4.915263575861023 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 66.85014696626193 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 66.85014696626193 \,\cdot\, 4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 267.4005878650477 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -283.48919954078906 + 267.4005878650477 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -16.088611675741333 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-16.088611675741333}{1000.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.016088611675741334 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.008569412357370453 + -0.016088611675741334 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.008730298474127866 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.20287459547633346 + -0.008730298474127866 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.2027872924915922 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{TecnamP92.propeller_thrust_coefficient}(0.7021384542265575) \,\cdot\, 1.2039602767160136 \,\cdot\, 125.55832664737831^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0022054569212690807 \,\cdot\, 1.2039602767160136 \,\cdot\, 125.55832664737831^2 \,\cdot\, 1.74^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 383.7061575722231 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 383.7061575722231 \text{ Newtons, in direction } 0.2027872924915922 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (375.84364312296117,77.27853054309396) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.2039602767160136 \,\cdot\, {24.413927909925626}^2 \,\cdot\, 0.03 \,\cdot\, 1.2 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 12.916950012575231 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 12.916950012575231\text{ Newtons in direction away from } 0.038126740261677436 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-12.907562798438319,-0.4923618910297632) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -600.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-5880.0) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (375.84364312296117,77.27853054309396) + (-643.7399680160003,5734.823730964559)(1.7832633012530916,-68.23769642914075) + (-12.907562798438319,-0.4923618910297632)(0,-5880.0) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-279.0206243902243,-136.62779681251686) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(-279.0206243902243,-136.62779681251686)}{600.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-0.4650343739837072,-0.22771299468752812) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (24.396185426677608,0.9305979895790267) + (-0.4650343739837072,-0.22771299468752812) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (24.39153508293777,0.9283208596321515) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1912.6724958372301,180.34367644747098) + (24.39153508293777,0.9283208596321515) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1912.9164111880596,180.3529596560673) \)</td></tr>
+</table>
+<h1>Test 10</h1>
+<code>test_aircraft10 = Cessna172(angular_velocity=2.5462461874185127, engine_rpm=5789.881024080416, linear_velocity=(39.59202073532071, -43.20742419924472), pitch_angle_radians=-0.6335645532198284, position=(1886.9970724837021, 388.531086940641), stabilizer_angle_radians=-0.2792526803190927, throttle=1.0, time_elapsed=67.196)<br>simulate_one_time_step(test_aircraft10, 0.01)</code>
+<div><img style='max-width:300px; padding:10px' src='test10.png'></div>
+<h3>Engine torque generated</h3>
+<table>
+<tr><td>\( \tau_e \)</td><td>=</td><td>\( \text{Cessna172.engine_torque}(throttle, N_e) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Cessna172.engine_torque}(1.0, 5789.881024080416) \)</td></tr>
+<tr><td></td><td>=</td><td>\( -374.9671959752841 \)</td></tr>
+</table>
+<h3>Airspeed</h3>
+<table>
+<tr><td>\( |v| \)</td><td>=</td><td>\( |(39.59202073532071,-43.20742419924472)| \)</td></tr>
+<tr><td></td><td>=</td><td>\( 58.60383615293066 \)</td></tr>
+</table>
+<h3>Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( 5789.881024080416 \)</td></tr>
+</table>
+<h3>Propeller RPM</h3>
+<table>
+<tr><td>\( N_p \)</td><td>=</td><td>\( \frac{N_e}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5789.881024080416}{1.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5789.881024080416 \)</td></tr>
+</table>
+<h3>Advance ratio</h3>
+<table>
+<tr><td>\( J \)</td><td>=</td><td>\( \frac{|v|}{\frac{N_p}{60} \,\cdot\, D_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{58.60383615293066}{\frac{5789.881024080416}{60} \,\cdot\, 1.88} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.32303516921872943 \)</td></tr>
+</table>
+<h3> Air Density</h3>
+<table>
+<tr><td>\( h \)</td><td>=</td><td>\( 388.531086940641 \)</td></tr>
+</table>
+<table>
+<tr><td>\( T_h \)</td><td>=</td><td>\( T_0 - L \,\cdot\, h \)</td></tr>
+<tr><td></td><td>=</td><td>\( 288.15 - 0.0065 \,\cdot\, 388.531086940641 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 285.6245479348858 \)</td></tr>
+</table>
+<table>
+<tr><td>\( P_h \)</td><td>=</td><td>\( P_0 \,\cdot\, \left( \frac{T_h}{T_0} \right)^{\frac{g}{L \: R}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 101325\,\cdot\, \left( \frac{285.6245479348858}{288.15} \right)^{\frac{9.8}{0.0065 \: 287.05}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 96746.7345806474 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \rho \)</td><td>=</td><td>\( \frac{P_h}{R \,\cdot\, T_h} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{96746.7345806474}{287.05 \,\cdot\, 285.6245479348858} \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.1800033337431777 \)</td></tr>
+</table>
+<h3>Propeller radians per second</h3>
+<table>
+<tr><td>\( \omega_p \)</td><td>=</td><td>\( \frac{N_p \,\cdot\, 2 \,\cdot\, \pi}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{5789.881024080416 \,\cdot\, 2 \,\cdot\, 3.141592653589793}{60} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 606.3149230136661 \)</td></tr>
+</table>
+<h3>Propeller torque load</h3>
+<table>
+<tr><td>\( Q_p \)</td><td>=</td><td>\( C_Q(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Cessna172.propeller_torque_coefficient}(0.32303516921872943) \,\cdot\, 1.1800033337431777 \,\cdot\, + 606.3149230136661^2 \,\cdot\, 1.88^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0001753041725751522 \,\cdot\, 1.1800033337431777 \,\cdot\, + 606.3149230136661^2 \,\cdot\, 1.88^5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1785.9169076840767 \)</td></tr>
+</table>
+<h3>Engine torque load</h3>
+<table>
+<tr><td>\( Q_e \)</td><td>=</td><td>\( \frac{Q_p}{G} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1785.9169076840767}{1.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1785.9169076840767 \)</td></tr>
+</table>
+<h3>Engine net torque</h3>
+<table>
+<tr><td>\( \tau_\text{net} \)</td><td>=</td><td>\( \tau_e - Q_e \)</td></tr>
+<tr><td></td><td>=</td><td>\( -374.9671959752841 - 1785.9169076840767 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2160.884103659361 \)</td></tr>
+</table>
+<h3>Engine angular acceleration</h3>
+<table>
+<tr><td>\( \alpha_e \)</td><td>=</td><td>\( \frac{\tau_\text{net}}{I_e} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{-2160.884103659361}{0.2} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -10804.420518296803 \)</td></tr>
+</table>
+<h3>Update Engine RPM</h3>
+<table>
+<tr><td>\( N_e \)</td><td>=</td><td>\( N_e + \alpha_e \,\cdot\, \Delta t \,\cdot\, \frac{60}{\pi} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 5789.881024080416 + -10804.420518296803\,\cdot\, 0.01 \,\cdot\, \frac{60}{3.141592653589793} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 3726.3887048038946 \)</td></tr>
+<tr><td></td><td>=</td><td>\(  &= 2700 \text{ reduced to max Cessna172 engine RPM} \\ \)</td></tr>
+</table>
+<h3>Wing moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to wing} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 1.6406094968746698 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.0070449436548414 \)</td></tr>
+</table>
+<h3>Angle of Wings</h3>
+<table>
+<tr><td>\( \text{angle of wings} \)</td><td>=</td><td>\( \theta + \text{ angle of wings (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 0.026179938779914945 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6073846144399134 \)</td></tr>
+</table>
+<h3>Angle to Relative Airflow</h3>
+<table>
+<tr><td>\( RAF \)</td><td>=</td><td>\( \text{Angle to } v \text{ (relative to horizontal)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Angle to }(39.59202073532071,-43.20742419924472) \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.8290350306135054 \)</td></tr>
+</table>
+<h3>Angle of Attack (wing)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (wing)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6073846144399134 - -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.22165041617359194 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (wing)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 16.2 \,\cdot\, \text{Cessna172.wing_lift_coefficient}(0.22165041617359194) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 16.2 \,\cdot\, 1.569963337406506 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 51535.8988094781 \)</td></tr>
+</table>
+<h3>Lift Force (wing)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 51535.8988094781 \text{ in direction normal to } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 51535.8988094781 \text{ in direction } 0.7417612961813912 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (37996.37681635141,34817.01042494314) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(wing)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{51535.8988094781}^2}{0.5 \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 16.2 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.8 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 4310.117898226902 \)</td></tr>
+</table>
+<h3>Induced Drag (wing)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 4310.117898226902 \text{ in direction away from } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-2911.861891650974,3177.762832649205) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (wing)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (37996.37681635141,34817.01042494314) + (-2911.861891650974,3177.762832649205) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (35084.51492470044,37994.773257592344) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (wing)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (35084.51492470044,37994.773257592344) \text{ in direction } 1.0070449436548414 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (35084.51492470044,37994.773257592344) \text{ in direction } 2.577841270449738 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -9352.49465022511 \)</td></tr>
+</table>
+<h3>Compute Moment(wing)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( -9352.49465022511 \,\cdot\, 1.0 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -9352.49465022511 \)</td></tr>
+</table>
+<h3>Stabilizer moment arm</h3>
+<table>
+<tr><td>\( \gamma \)</td><td>=</td><td>\( \theta + \text{angle from center of gravity to stabilizer} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 3.0543261909900767 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.4207616377702483 \)</td></tr>
+</table>
+<h3>Angle of Stabilizer</h3>
+<table>
+<tr><td>\( \text{angle of stabilizer} \)</td><td>=</td><td>\( \theta + \text{ angle of stabilizer (relative to aircraft)} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + -0.2792526803190927 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.9128172335389211 \)</td></tr>
+</table>
+<h3>Angle of Attack (stabilizer)</h3>
+<table>
+<tr><td>\( \phi \)</td><td>=</td><td>\( \text{angle of aerofoil (stabilizer)} - \text{angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.9128172335389211 - -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.08378220292541572 \)</td></tr>
+</table>
+<h3>Magnitude of Lift (stabilizer)</h3>
+<table>
+<tr><td>\( |F_L| \)</td><td>=</td><td>\( \frac{1}{2} \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, S \,\cdot\, C_L(\phi) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 3.0 \,\cdot\, \text{Cessna172.stabilizer_lift_coefficient}(-0.08378220292541572) \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1}{2} \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 3.0 \,\cdot\, -0.38402933007479517 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2334.4844150947397 \)</td></tr>
+</table>
+<h3>Lift Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_L \)</td><td>=</td><td>\( |F_L| \text{ in direction normal to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2334.4844150947397 \text{ in direction normal to } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -2334.4844150947397 \text{ in direction } 0.7417612961813912 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1721.1681867771372,-1577.1485526565118) \)</td></tr>
+</table>
+<h3>Induced Drag Magnitude(stabilizer)</h3>
+<table>
+<tr><td>\( |F_i| \)</td><td>=</td><td>\( \frac{{|F_L|}^2}{0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, A_w \,\cdot\, \pi \,\cdot\, e \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{{-2334.4844150947397}^2}{0.5 \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 3.0 \,\cdot\, 3.141592653589793 \,\cdot\, + 0.7 \,\cdot\, AR} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 94.36777472251299 \)</td></tr>
+</table>
+<h3>Induced Drag (stabilizer)</h3>
+<table>
+<tr><td>\( F_i \)</td><td>=</td><td>\( |F_i| \text{ in direction away from relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 94.36777472251299 \text{ in direction away from } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-63.75369154691364,69.57545343165184) \)</td></tr>
+</table>
+<h3>Total Aerodynamic Force (stabilizer)</h3>
+<table>
+<tr><td>\( F_a \)</td><td>=</td><td>\( F_L + F_i \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1721.1681867771372,-1577.1485526565118) + (-63.75369154691364,69.57545343165184) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-1784.9218783240508,-1507.57309922486) \)</td></tr>
+</table>
+<h3>Force component normal to moment arm (stabilizer)</h3>
+<table>
+<tr><td>\( |F_n| \)</td><td>=</td><td>\( \text{component of } F_a \text{ in direction normal to moment arm angle } \gamma \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1784.9218783240508,-1507.57309922486) \text{ in direction } 2.4207616377702483 + 90^{\circ} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{component of } (-1784.9218783240508,-1507.57309922486) \text{ in direction } 3.991557964565145 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2310.6404863303915 \)</td></tr>
+</table>
+<h3>Compute Moment(stabilizer)</h3>
+<table>
+<tr><td>\( M \)</td><td>=</td><td>\( |F_n| \,\cdot\, d \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2310.6404863303915 \,\cdot\, 4.84 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 11183.499953839095 \)</td></tr>
+</table>
+<h3>Net Moment</h3>
+<table>
+<tr><td>\( M_{net} \)</td><td>=</td><td>\( M_w + M_s \)</td></tr>
+<tr><td></td><td>=</td><td>\( -9352.49465022511 + 11183.499953839095 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1831.0053036139852 \)</td></tr>
+</table>
+<h3>Angular Acceleration</h3>
+<table>
+<tr><td>\( \alpha_t \)</td><td>=</td><td>\( \frac{M_{net}}{I_p} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{1831.0053036139852}{1200.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1.5258377530116543 \)</td></tr>
+</table>
+<h3>Update Angular Velocity and Pitch</h3>
+<table>
+<tr><td>\( \omega_{(t+\Delta t)} \)</td><td>=</td><td>\( \omega_t + \alpha_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.5462461874185127 + 1.5258377530116543 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 2.5615045649486294 \)</td></tr>
+</table>
+<table>
+<tr><td>\( \theta_{(t+\Delta t)} \)</td><td>=</td><td>\( \theta_t + \omega_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6335645532198284 + 2.5615045649486294 \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( -0.6079495075703422 \)</td></tr>
+</table>
+<h3>Engine Thrust Force</h3>
+<table>
+<tr><td>\( |F_t| \)</td><td>=</td><td>\( C_T(J) \,\cdot\, \rho \,\cdot\, \omega_p^2 \,\cdot\, D_p^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( \text{Cessna172.propeller_thrust_coefficient}(0.6927167393963436) \,\cdot\, 1.1800033337431777 \,\cdot\, 282.7433388230814^2 \,\cdot\, 1.88^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.0015604305568802947 \,\cdot\, 1.1800033337431777 \,\cdot\, 282.7433388230814^2 \,\cdot\, 1.88^4 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1838.839574478919 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_t \)</td><td>=</td><td>\( \text{ in direction } \theta \)</td></tr>
+<tr><td></td><td>=</td><td>\( 1838.839574478919 \text{ Newtons, in direction } -0.6079495075703422 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1509.3580543286753,-1050.3186395103953) \)</td></tr>
+</table>
+<h3>Parasitic Drag Force</h3>
+<table>
+<tr><td>\( |F_d| \)</td><td>=</td><td>\( 0.5 \,\cdot\, \rho \,\cdot\, {|v|}^2 \,\cdot\, C_d \,\cdot\, A_{\text{plane}} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 0.5 \,\cdot\, 1.1800033337431777 \,\cdot\, {58.60383615293066}^2 \,\cdot\, 0.025 \,\cdot\, 1.5 \)</td></tr>
+<tr><td></td><td>=</td><td>\( 75.98652733894264 \)</td></tr>
+</table>
+<table>
+<tr><td>\( F_d \)</td><td>=</td><td>\( |F_d| \text{ in direction away from angle to relative airflow} \)</td></tr>
+<tr><td></td><td>=</td><td>\( 75.98652733894264\text{ Newtons in direction away from } -0.8290350306135054 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (-51.33555008511134,56.02333116203375) \)</td></tr>
+</table>
+<h3>Weight Force</h3>
+<table>
+<tr><td>\( F_g \)</td><td>=</td><td>\( (0, -m \,\cdot\, g) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0, -1086.0 \,\cdot\, 9.8) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (0,-10642.800000000001) \)</td></tr>
+</table>
+<h3>Rolling Resistance Force</h3>
+<table>
+<tr><td>\( F_r \)</td><td>=</td><td>\( (0, 0) \text{ since not on ground or not moving} \)</td></tr>
+</table>
+<h3>Net Force</h3>
+<table>
+<tr><td>\( F_{\text{net}} \)</td><td>=</td><td>\( F_t + F_w + F_s + F_d + F_g + F_r \\ \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1509.3580543286753,-1050.3186395103953) + (38066.634225493974,41871.436721098806)(-1225.6786516277175,-1061.4252767114413) + (-51.33555008511134,56.02333116203375)(0,-10642.800000000001) + (0,0) \)</td></tr>
+<tr><td></td><td>=</td><td>\( (38298.978078109816,29172.91613603899) \)</td></tr>
+</table>
+<h3>Linear Acceleration</h3>
+<table>
+<tr><td>\( a_t \)</td><td>=</td><td>\( \frac{F_{\text{net}}}{m} \)</td></tr>
+<tr><td></td><td>=</td><td>\( \frac{(38298.978078109816,29172.91613603899)}{1086.0} \)</td></tr>
+<tr><td></td><td>=</td><td>\( (35.26609399457626,26.86272204055156) \)</td></tr>
+</table>
+<h3>Update Linear Velocity and Position}</h3>
+<table>
+<tr><td>\( v_{(t+\Delta t)} \)</td><td>=</td><td>\( v_t + a_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (39.59202073532071,-43.20742419924472) + (35.26609399457626,26.86272204055156) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (39.94468167526647,-42.93879697883921) \)</td></tr>
+</table>
+<table>
+<tr><td>\( r_{(t+\Delta t)} \)</td><td>=</td><td>\( r_t + v_{(t+\Delta t)} \,\cdot\, \Delta t \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1886.9970724837021,388.531086940641) + (39.94468167526647,-42.93879697883921) \,\cdot\, 0.01 \)</td></tr>
+<tr><td></td><td>=</td><td>\( (1887.3965193004549,388.1016989708526) \)</td></tr>
+<script type="text/javascript">
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    </script>
+</body>
+</html>
