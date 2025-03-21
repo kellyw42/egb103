@@ -1,6 +1,8 @@
+
 from tecnam import TecnamP92
 from cessna import Cessna172
 from IPython.display import display, HTML
+import hashlib
 
 test_aircraft = [
     'TecnamP92()',
@@ -78,11 +80,13 @@ def compare_aircraft(obj1, obj2):
     # If all attributes match, return True
     return True
 
-def show_testcase(function, aircraft_src, extra_args_src) :
+def show_testcase(function, aircraft_src, extra_args_src, hashId) :
     print(f'Your function {function.__name__} failed at least one test ...')
     print()
     print('Here is an example of a test case that you can try for yourself:')
     print()
+
+    display(HTML(hashId))  
 
     if extra_args_src and extra_args_src.endswith(','):
         extra_args_src = extra_args_src[:-1]
@@ -109,7 +113,28 @@ def explain_debug():
     print('Just cut and paste the above code example into a code cell so that you can run it yourself.') 
     print()
 
+def hashCode(function, aircraft_src, extra_args_src):
+    name = function.__name__ + '('
+    if aircraft_src :
+        name += aircraft_src
+    if extra_args_src:
+        if aircraft_src:
+            name += ', '
+        name += extra_args_src
+    if name.endswith(','):
+        name = name[:-1]
+    name += ')'
+    return hashlib.sha256(name.encode('utf-8')).hexdigest()
+
+def hash(function, aircraft_src, extra_args_src):
+    if aircraft_src:
+        test_num = ' ' + str(test_aircraft.index(aircraft_src))
+    else :
+        test_num = ''
+    return '<a href="https://kellyw42.github.io/egb103/examples.html#' + hashCode(function, aircraft_src, extra_args_src) + '">Failed test' + test_num + '</a>'
+
 def run_test(function, aircraft_src, extra_args_src, expected_result, expected_update_src, explain) :
+    hashId = hash(function, aircraft_src, extra_args_src)
     aircraft = eval(aircraft_src) if aircraft_src else None
     aircraft_args = [aircraft] if aircraft_src else []
     extra_args = eval(extra_args_src) if extra_args_src else []
@@ -125,36 +150,36 @@ def run_test(function, aircraft_src, extra_args_src, expected_result, expected_u
                 print(f'It looks like you have not yet attempted to implement function {function.__name__} since it is raising a NotImplementedError.')
                 print(f"If you have attempted to implement that function then be sure to remove the line that contains raise NotImplementedError('{str(e)}').")
                 print()
-            return None
+            return None, hashId
         else:
             if explain:
                 print()
                 print(f'It looks like your function {function.__name__} calls {str(e)} which has not yet been implemented.')
                 print(f'You should implement that function first as function {function.__name__} will not work without it.')
                 print()
-            return False 
+            return False, hashId 
     except Exception as e:
         if explain :
-            show_testcase(function, aircraft_src, extra_args_src)
+            show_testcase(function, aircraft_src, extra_args_src, hashId)
             show_exception(e)
             explain_debug();
-        return False
+        return False, hashId
         
     if not test_equal(actual_result, expected_result) :
         if explain :
-            show_testcase(function, aircraft_src, extra_args_src)
+            show_testcase(function, aircraft_src, extra_args_src, hashId)
             print('print(actual_result)')
             print()
             print(f'The expected result is {expected_result}')
             print(f'Currently your function is returning the incorrect value {actual_result}')
             explain_debug();
-        return False   
+        return False, hashId   
 
     # check if the aircraft object (if there is one) has been modified correctly if it is expected to be updated
     if expected_after and not test_equal(aircraft, expected_after) :
         if explain :
 
-            show_testcase(function, aircraft_src, extra_args_src)
+            show_testcase(function, aircraft_src, extra_args_src, hashId)
             print()         
             
             actual_attrs1 = dir(aircraft)
@@ -181,38 +206,38 @@ def run_test(function, aircraft_src, extra_args_src, expected_result, expected_u
                         print(f'test_aircraft.{attr} has value {actual}, but should be {expected}')
         if explain:
             explain_debug()    
-        return False
+        return False, hashId
     
-    return True
+    return True, hashId
 
 def test_function(function, explain):
     function_name = function.__name__
     if function_name in other_tests:
         for extra_args, expected_result in  other_tests[function_name]:
-            result = run_test(function, None, extra_args, expected_result, None, explain)
+            result,hashId = run_test(function, None, extra_args, expected_result, None, explain)
             if not result:
-                return result
+                return result,hashId
     else :
         for test_num in range(len(test_aircraft)) :
             aircraft_src = test_aircraft[test_num]
             
             if function_name in single_param_tests:
-                result = run_test(function, aircraft_src, None, single_param_tests[function_name][test_num], aircraft_src, explain)
+                result,hashId = run_test(function, aircraft_src, None, single_param_tests[function_name][test_num], aircraft_src, explain)
                 if not result:
-                    return result
+                    return result,hashId
             elif function_name in extra_param_tests :
                 for extra_args, expected_result in extra_param_tests[function_name][test_num] :
-                    result = run_test(function, aircraft_src, extra_args, expected_result, aircraft_src, explain)
+                    result,hashId = run_test(function, aircraft_src, extra_args, expected_result, aircraft_src, explain)
                     if not result:
-                        return result
+                        return result,hashId
             elif function_name in update_tests:
                 for extra_args, expected_update in update_tests[function_name][test_num]:
-                    result = run_test(function, aircraft_src, extra_args, None, expected_update, explain)
+                    result,hashId = run_test(function, aircraft_src, extra_args, None, expected_update, explain)
                     if not result:
-                        return result
+                        return result,hashId
             else :
-                return False
-    return True
+                return False,'???'
+    return True, 'N/A'
 
 def test_correctness(*functions) :    
     good = []
@@ -221,21 +246,21 @@ def test_correctness(*functions) :
     
     for function in functions:
         function_name = function.__name__
-        test_result = test_function(function, len(functions) == 1)
+        test_result,hashId = test_function(function, len(functions) == 1)
         if test_result == True :
             good.append(function.__name__)
         elif test_result == False :
-            bad.append(function.__name__)
+            bad.append((function.__name__,hashId))
         else :
             unimplemented.append(function.__name__)
 
     table = '<table>'
     for name in sorted(good):
-        table += f'<tr><td style="text-align: left">{name}:</td><td style="text-align: left">\u2705 Pass</td></tr>'
-    for name in sorted(bad):  
-        table += f'<tr><td style="text-align: left">{name}:</td><td style="text-align: left">\u274C Fail</td></tr>'  
+        table += f'<tr><td style="text-align: left">{name}:</td><td style="text-align: left">\u2705 Pass</td><td></td></tr>'
+    for name,h1 in sorted(bad):  
+        table += f'<tr><td style="text-align: left">{name}:</td><td style="text-align: left">\u274C Fail</td><td>' + h1 + '</td></tr>'  
     for name in sorted(unimplemented):  
-        table += f'<tr><td style="text-align: left">{name}:</td><td style="text-align: left">\u23F3 Not unimplemented yet</td></tr>'          
+        table += f'<tr><td style="text-align: left">{name}:</td><td style="text-align: left">\u23F3 Not unimplemented yet</td><td></td></tr>'          
     
     table += '</table>'
     
