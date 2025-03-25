@@ -237,6 +237,13 @@ def test_function(function, explain):
                         return result,hashId
             else :
                 return False,'???'
+
+        if function_name == 'is_on_ground':
+            below_ground_test = "TecnamP92(position=(42,-0.01)),"
+            result,hashId = run_test(function, None, below_ground_test, True, None, explain)    
+            if not result:
+                return result,hashId
+                
     return True, 'N/A'
 
 def test_correctness(*functions) :    
