@@ -204,7 +204,8 @@ tests = {
             ('ball0:Ball(ball_number=0, centre_position_x=0.488, centre_position_y=0.61, velocity_x=4.99, velocity_y=0.01)', 'Cushion(name="Right"), ball0', '0.3875773134391681'),  
             ('ball0:Ball(ball_number=0, centre_position_x=0.488, centre_position_y=0.61, velocity_x=4.99, velocity_y=0.01)', 'pool_table.POCKETS[5], ball0', 'None'),
             ('ball0:Ball(ball_number=0, centre_position_x=0.488, centre_position_y=0.61, velocity_x=4.99, velocity_y=0.01)', 'Cushion(name="Bottom"), ball0', 'None'),
-            ('ball3:Ball(ball_number=3, centre_position_x=1.8741672955930064, centre_position_y=0.6355)', 'Ball(ball_number=2, centre_position_x=1.8741672955930064, centre_position_y=0.5845), ball3', 'None')
+            ('ball3:Ball(ball_number=3, centre_position_x=1.8741672955930064, centre_position_y=0.6355)', 'Ball(ball_number=2, centre_position_x=1.8741672955930064, centre_position_y=0.5845), ball3', 'None'),
+            ('ball1:Ball(ball_number=1, centre_position_x=1.83, centre_position_y=0.61, velocity_x=4.849760161591758)', 'Ball(ball_number=2, centre_position_x=1.8741672955930064, centre_position_y=0.5845), ball1', '0')
         ],
     'find_next_collisions':
         [
