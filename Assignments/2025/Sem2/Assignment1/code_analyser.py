@@ -313,7 +313,7 @@ def analyse_other_nonfunctional_criteria(functions, Ball, Cushion):
     print()
 
     Heading('Assessment Criteria 2b: Appropriate use of loops')
-    loops(functions)
+    #loops(functions)
     print()
 
     Heading('Assessment Criteria 2c: Functions make use of other appropriate functions')

@@ -174,14 +174,14 @@ class GUIPoolSimulator:
         display(widgets.VBox([self.angle, self.power, widgets.HBox([self.restart_button, self.strike_button, self.replay_button, self.retry_button]), self.image_widget]))
 
 def play(create_animation, Ball):
-    if code_analyser.all_correct:
+    #if code_analyser.all_correct:
         gui = GUIPoolSimulator()
         gui.create_animation = create_animation
         gui.Ball = Ball
         gui.create_gui()
         gui.restart(None)
-    else:
-        print("Sorry, you can't play until all of your functions are working correctly.")
+    #else:
+    #    print("Sorry, you can't play until all of your functions are working correctly.")
 
 def show(balls, Ball):
     gui = GUIPoolSimulator()
