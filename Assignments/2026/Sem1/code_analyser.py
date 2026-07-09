@@ -96,27 +96,26 @@ class Function :
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-all_functions = ['zero_velocity_equilibrium', 'delta_x', 'delta_y', 'apply_fan_force', 'opposite_direction', 'compute_density', 'compute_velocity', 'compute_speed', 'compute_equilibrium', 'relax_towards', 'compute_width_and_height', 'apply_fan_and_collide_within_one_cell', 'apply_fan_and_collide_all_cells', 'get_upstream_cell', 'stream_or_bounce_one_cell', 'stream_or_bounce_all_cells', 'simulate', 'Direction', 'math', 'copy']
+all_functions = ['earth_altitude', 'gravitational_acceleration', 'earth_gravitational_acceleration', 'moon_gravitational_acceleration', 'drag_acceleration', 'gravity_turn_direction',  'engine_acceleration', 'net_acceleration', 'update_position_and_velocity', 'log_spacecraft_position', 'is_mission_event_triggered_now', 'execute_mission_event', 'execute_next_mission_event_if_triggered', 'adaptive_time_step', 'execute_mission', 'detect_perigee_and_apogee', 'artemis2_mission_timeline']
 
             
 expected = {
-    'relax_towards': Function(),
-    'zero_velocity_equilibrium':Function(ifStmt=True, complexity=9),
-    'delta_x':Function(ifStmt=True, complexity=9),
-    'delta_y':Function(ifStmt=True, complexity=9),
-    'opposite_direction':Function(ifStmt=True, complexity=9),
-    'compute_density':Function(),
-    'compute_velocity':Function(Loops = 'ForEach', complexity=2, uses = ['compute_density']),
-    'compute_speed':Function(uses = ['compute_velocity']),
-    'compute_equilibrium':Function(Loops = 'ForEach', uses = ['delta_x', 'delta_y', 'zero_velocity_equilibrium'], complexity=2),
-    'compute_width_and_height':Function(),
-    'get_upstream_cell':Function(uses = ['delta_x', 'delta_y', 'compute_width_and_height'], ifStmt=True, complexity=3),
-    'apply_fan_force':Function(ifStmt=True,complexity=2),
-    'apply_fan_and_collide_within_one_cell':Function(Loops = 'ForEach', uses = ['relax_towards', 'compute_velocity', 'compute_density', 'apply_fan_force', 'compute_equilibrium'], complexity=3),
-    'apply_fan_and_collide_all_cells':Function(Loops = 'RangeLoops', uses = ['compute_width_and_height', 'apply_fan_and_collide_within_one_cell', 'is_fan_cell_function'], ifStmt=True, complexity=4),
-    'stream_or_bounce_one_cell':Function(Loops = 'ForEach', uses = ['get_upstream_cell', 'opposite_direction'], ifStmt=True, complexity=3),
-    'stream_or_bounce_all_cells':Function(Loops = 'RangeLoops', uses = ['compute_width_and_height', 'stream_or_bounce_one_cell'], ifStmt=True, complexity=4),    
-    'simulate':Function(Loops = 'RangeLoop', uses = ['apply_fan_and_collide_all_cells', 'stream_or_bounce_all_cells', 'report_new_distribution'], complexity=2),
+    'earth_altitude': Function(),
+    'gravitational_acceleration':Function(uses=[], complexity=0),
+    'earth_gravitational_acceleration':Function(uses=[], complexity=0),
+    'moon_gravitational_acceleration':Function(uses=[], complexity=0),
+    'drag_acceleration':Function(uses=[], ifStmt=True, complexity=0),
+    'gravity_turn_direction':Function(uses=[], complexity=0),
+    'engine_acceleration':Function(ifStmt=True, complexity=, uses = []),
+    'net_acceleration':Function(uses = [], complexity=0),
+    'update_position_and_velocity':Function(uses = [], complexity=0),
+    'log_spacecraft_position':Function(ifStmt=True, complexity=0),
+    'is_mission_event_triggered_now':Function(uses = [], ifStmt=True, complexity=0),
+    'execute_mission_event':Function(ifStmt=True,complexity=0),
+    'execute_next_mission_event_if_triggered':Function(uses = [], complexity=0),
+    'adaptive_time_step':Function(uses = [], ifStmt=True, complexity=0),
+    'execute_mission':Function(Loops = '???', uses = [], ifStmt=True, complexity=0),
+    'detect_perigee_and_apogee':Function(Loops = '???', uses = [], ifStmt=True, complexity=0)
 }
 
 # -----------------------------------------------------------------------------------
