@@ -8,7 +8,7 @@ import ast
 import math
 import radon.complexity
 import builtins
-import test_correctness
+import hidden.test_correctness as test_correctness
 import builtins
 
 

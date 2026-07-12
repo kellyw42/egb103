@@ -11,9 +11,10 @@ from html import escape
 import spice_api
 from celestial_body import earth
 from mission_event import convert_seconds_to_string
-from mission_render import MissionRender, DISPLAY_SIZE_PX
 from vector3d import to_tuple
-import camera_tracking
+
+from hidden.mission_render import MissionRender, DISPLAY_SIZE_PX
+import hidden.camera_tracking as camera_tracking
 
 
 
