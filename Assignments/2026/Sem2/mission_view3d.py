@@ -13,6 +13,8 @@ from celestial_body import earth
 from mission_event import convert_seconds_to_string
 from mission_render import MissionRender, DISPLAY_SIZE_PX
 from vector3d import to_tuple
+import camera_tracking
+
 
 
 STAGE_IMAGES = [
@@ -150,7 +152,7 @@ def build_engine_data_by_index(mission_log):
     return engine_data_by_index
     
 
-def next_event_index_after(event_indices, current_index):
+def next_event_index_after(event_indices, current_index):   
     for event_index in event_indices:
         if event_index > current_index:
             return event_index
@@ -192,7 +194,10 @@ class MissionView3D:
         self.engine_data_by_index = build_engine_data_by_index(self.mission_log)        
         self.loaded_stage_images = load_stage_images(STAGE_IMAGES)
         self.stage_data_by_index = build_stage_data_by_index(self.mission_log, self.loaded_stage_images)
-        self.camera_keyframes = [(0, -0.016, 30000), (155, -0.016, 30000), (362, 0.07, 37000), (844, 0.09, 48000), (1500, -0.02, 48000), (1782, 0.07, 48000), (3197, 0.50, 228000), (7231, 1.00, 30000), (11152, 0.50, 228000), (12381, 0.16, 98000), (12833, 0.07, 46000), (self.time_max, -0.02, 30000)]
+        #self.camera_keyframes = [(0, -0.016, 30000), (155, -0.016, 30000), (362, 0.07, 37000), (844, 0.09, 48000), (1500, -0.02, 48000), (1782, 0.07, 48000), (3197, 0.50, 228000), (7231, 1.00, 30000), (11152, 0.50, 228000), (12381, 0.16, 98000), (12833, 0.07, 46000), (self.time_max, -0.02, 30000)]
+        #self.camera_keyframes = [(0, -0.016, 30000), (155, -0.016, 50000), (886, -0.016, 100000), (1500, -0.016, 100000), (1782, 0.07, 48000), (3197, 0.50, 228000), (7231, 1.00, 30000), (11152, 0.50, 228000), (12381, 0.16, 98000), (12833, 0.07, 46000), (self.time_max, -0.02, 30000)]
+        self.camera_keyframes = camera_tracking.compute_keyframes(self.mission_log)
+        
 
     def create_widgets(self):
         self.image_widget = widgets.Image(layout=widgets.Layout(width=f"{DISPLAY_SIZE_PX}px", height=f"{DISPLAY_SIZE_PX}px"))
@@ -425,7 +430,7 @@ class MissionView3D:
             self.vehicle_image.value = stage_data["data"]
             self.current_stage_data = stage_data
         self.stage_label.value = f"<div class='mission-stage-title'>{escape(stage_data['name'])}</div>"
-        self.time_value_widget.value = telemetry_line("UTC Time:", f"{utc}", align="left")
+        self.time_value_widget.value = telemetry_line("UTC Time:", f"{utc} ({index})", align="left")
         self.elapsed_value_widget.value = telemetry_line("Elapsed Time:", f"{elapsed}", align="left")
         self.engine_bar.value = render_engine_bar(engine_on)
         self.alt_row.value = telemetry_line("Altitude:", f"{altitude:,.1f}", "km")
