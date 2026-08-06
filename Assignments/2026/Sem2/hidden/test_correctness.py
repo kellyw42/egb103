@@ -35,7 +35,7 @@ def test_equal(a, b, rel_tol=0.0, abs_tol=0.0):
     if isinstance(a, (int, float)) and isinstance(b, (int, float)):
         if math.isnan(a) or math.isnan(b):
             return math.isnan(a) and math.isnan(b)
-        return a == b
+        return math.isclose(a, b, rel_tol=rel_tol, abs_tol=abs_tol)
     if isinstance(a, EventKind) and isinstance(b, EventKind):
         return a == b
     if isinstance(a, str) and isinstance(b, str):
